@@ -33,10 +33,10 @@ add_compile_options(
      -ml               # Large model: far data pointers (flexible)
 
     # === SIZE vs SPEED (pick ONE) ===
-    -os                 # Optimize for CODE SIZE
-    -ox                 # Enable extra optimizations (dead code elimination)
+    #-os                 # Optimize for CODE SIZE
+    #-ox                 # Enable extra optimizations (dead code elimination)
     -zp1                # Pack structs to 1-byte alignment (Critical for data size)
-    -fpi87              # Assume 8087 exists (removes software FP emulation stubs if any are pulled in)
+    # -fpi87              # Assume 8087 exists (removes software FP emulation stubs if any are pulled in)
     # -ot               # Optimize for SPEED
     # -od               # Disable optimizations (debugging)
 
@@ -73,9 +73,6 @@ endif()
 file(GLOB SOURCES
     CONFIGURE_DEPENDS
     *.c
-    DOS/*.c
-    TEST/*.c
-    ../bioslib/src/BIOS/*.c
 )
 
 # message(Source list="${SOURCES}")
