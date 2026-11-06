@@ -1,19 +1,63 @@
-CMakeLists.txt.user
+# ---------------------------------------------------------------
+# CGALIB .gitignore
+# ---------------------------------------------------------------
+
+# --- Open Watcom (OWC) build output ----------------------------
+*.obj
+*.o
+*.lib
+*.exe
+*.com
+*.map
+*.sym
+*.err
+*.lst
+*.lnk
+*.pch
+
+# OWC IDE-generated make/link scripts (wcl / IDE regenerate these)
+*.mk
+*.mk1
+*.lk1
+
+# --- CMake ------------------------------------------------------
+build/
+build-*/
+cmake-build-*/
 CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
+CMakeFiles/
 cmake_install.cmake
+CTestTestfile.cmake
+Testing/
 install_manifest.txt
 compile_commands.json
-CTestTestfile.cmake
-_deps
-CMakeUserPresets.json
 
-# CLion
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#cmake-build-*
+# --- DOSBox-X ---------------------------------------------------
+# capture/
+
+# --- Zed --------------------------------------------------------
+# .zed/
+
+# --- macOS detritus ---------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# --- Editor leftovers -------------------------------------------
+*~
+*.swp
+*.swo
