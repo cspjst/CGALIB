@@ -21,6 +21,8 @@
 *.lk1
 
 # --- CMake ------------------------------------------------------
+# bin/ is the CMake build directory (see src/cmk.sh): all generated
+bin/
 build/
 build-*/
 cmake-build-*/
