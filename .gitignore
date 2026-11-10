@@ -1,8 +1,4 @@
-# ---------------------------------------------------------------
-# CGALIB .gitignore
-# ---------------------------------------------------------------
-
-# --- Open Watcom (OWC) build output ----------------------------
+# OWC build output
 *.obj
 *.o
 *.lib
@@ -20,9 +16,8 @@
 *.mk1
 *.lk1
 
-# --- CMake ------------------------------------------------------
-# bin/ is the CMake build directory (see src/cmk.sh): all generated
-bin/
+# CMake
+# bin/
 build/
 build-*/
 cmake-build-*/
@@ -34,13 +29,13 @@ Testing/
 install_manifest.txt
 compile_commands.json
 
-# --- DOSBox-X ---------------------------------------------------
+# DOSBox-X
 # capture/
 
-# --- Zed --------------------------------------------------------
+# Zed
 # .zed/
 
-# --- macOS detritus ---------------------------------------------
+# macOS detritus
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -59,7 +54,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# --- Editor leftovers -------------------------------------------
+# Editor leftovers
 *~
 *.swp
 *.swo
