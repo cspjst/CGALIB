@@ -22,6 +22,12 @@ add_compile_options(
 #   -e<n>   stop after n errors
 #   -fpi87  assume 8087 present (only if every target XT has one)
 
+# Dependencies
+# Vendored copies: include/{ENV,BIOS}/*.h, lib/ENV.lib, lib/BIOS.lib
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(ENV_LIB  ${CMAKE_CURRENT_SOURCE_DIR}/lib/ENV.lib)
+set(BIOS_LIB ${CMAKE_CURRENT_SOURCE_DIR}/lib/BIOS.lib)
+
 # Sources
 # Library code
 file(GLOB CGA_SOURCES
@@ -41,17 +47,23 @@ configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/../README.md
     @ONLY
 )
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/CGA/cga_version.h.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/CGA/cga_version.h
+  @ONLY
+)
 
 # Build mode options
-# set(MAKE_LIB ON)  # Comment out to build TEST.exe only
+set(MAKE_LIB ON)  # Comment out to build TEST.exe only
 
 if(MAKE_LIB)
     # CGA.LIB from library code; TEST.exe gets CGA code only via the lib
     add_library(CGALIB STATIC ${CGA_SOURCES})
     set_target_properties(CGALIB PROPERTIES OUTPUT_NAME CGA)
     add_executable(TEST ${TEST_SOURCES})
-    target_link_libraries(TEST PRIVATE CGALIB)
+    target_link_libraries(TEST PRIVATE CGALIB ${ENV_LIB} ${BIOS_LIB})
 else()
     # Everything compiled straight into TEST.exe
     add_executable(TEST ${TEST_SOURCES} ${CGA_SOURCES})
+    target_link_libraries(TEST PRIVATE ${ENV_LIB} ${BIOS_LIB})
 endif()

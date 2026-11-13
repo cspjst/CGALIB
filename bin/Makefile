@@ -107,6 +107,19 @@ depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 
 #=============================================================================
+# Target rules for targets named CGALIB
+
+# Build rule for target.
+CGALIB: .SYMBOLIC
+CGALIB: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 -h CGALIB
+
+# fast build rule for target.
+CGALIB/fast: .SYMBOLIC
+CGALIB/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/build
+
+#=============================================================================
 # Target rules for targets named TEST
 
 # Build rule for target.
@@ -118,6 +131,54 @@ TEST: cmake_check_build_system
 TEST/fast: .SYMBOLIC
 TEST/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/build
+
+CGA/cga_version.obj: .SYMBOLIC
+CGA/cga_version.obj: CGA/cga_version.c.obj
+
+# target to build an object file
+CGA/cga_version.c.obj: .SYMBOLIC
+CGA/cga_version.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_version.c.obj
+
+CGA/cga_version.i: .SYMBOLIC
+CGA/cga_version.i: CGA/cga_version.c.i
+
+# target to preprocess a source file
+CGA/cga_version.c.i: .SYMBOLIC
+CGA/cga_version.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_version.c.i
+
+CGA/cga_version.s: .SYMBOLIC
+CGA/cga_version.s: CGA/cga_version.c.s
+
+# target to generate assembly for a file
+CGA/cga_version.c.s: .SYMBOLIC
+CGA/cga_version.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_version.c.s
+
+TEST/test_cga.obj: .SYMBOLIC
+TEST/test_cga.obj: TEST/test_cga.c.obj
+
+# target to build an object file
+TEST/test_cga.c.obj: .SYMBOLIC
+TEST/test_cga.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga.c.obj
+
+TEST/test_cga.i: .SYMBOLIC
+TEST/test_cga.i: TEST/test_cga.c.i
+
+# target to preprocess a source file
+TEST/test_cga.c.i: .SYMBOLIC
+TEST/test_cga.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga.c.i
+
+TEST/test_cga.s: .SYMBOLIC
+TEST/test_cga.s: TEST/test_cga.c.s
+
+# target to generate assembly for a file
+TEST/test_cga.c.s: .SYMBOLIC
+TEST/test_cga.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga.c.s
 
 main.obj: .SYMBOLIC
 main.obj: main.c.obj
@@ -152,7 +213,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... CGALIB"
 	@echo "... TEST"
+	@echo "... CGA/cga_version.obj"
+	@echo "... CGA/cga_version.i"
+	@echo "... CGA/cga_version.s"
+	@echo "... TEST/test_cga.obj"
+	@echo "... TEST/test_cga.i"
+	@echo "... TEST/test_cga.s"
 	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"

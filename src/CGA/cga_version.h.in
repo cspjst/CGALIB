@@ -1,0 +1,33 @@
+#ifndef CGA_VERSION_H
+#define CGA_VERSION_H
+
+#define CGA_VERSION_MAJOR  @PROJECT_VERSION_MAJOR@
+#define CGA_VERSION_MINOR  @PROJECT_VERSION_MINOR@
+#define CGA_VERSION_PATCH  @PROJECT_VERSION_PATCH@
+
+/**
+ * single comparable value: 0xMMmm (major high byte, minor low byte)
+ * matches the way DOS reports its own version (major in AH, minor in AL)
+ */
+#define CGA_VERSION        ((CGA_VERSION_MAJOR << 8) | CGA_VERSION_MINOR)
+
+#define CGA_VERSION_STRING "@PROJECT_VERSION@"
+
+#define CGA_MIN_BIOS_VERSION 0x0009
+
+/**
+* @brief   Version of CGA.LIB as built.
+*
+* Packed as 0xMMmm: major in the high byte, minor in the low byte.
+* Compare with the CGA_VERSION macro to detect a header/library mismatch.
+*/
+unsigned int cga_version();
+
+/**
+* @brief   Full version string of CGA.LIB as built, e.g. "1.2.3".
+*
+* Includes the patch number, which cga_version() omits.
+*/
+const char* cga_version_string();
+
+#endif
