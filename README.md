@@ -10,6 +10,13 @@
 # CGALIB
 A C library for programming IBM CGA graphics and text modes on the IBM PC/XT, built with Open Watcom.
 
+## Gallery
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="img/cga_plot.png" width="300"> | | |
+| `cga_med_plot`: 1,024 random points, palette 1, 86Box IBM XT | | |
+
 ## Plotting performance
 
 ### Correctness first: dump and diff
