@@ -132,6 +132,57 @@ TEST/fast: .SYMBOLIC
 TEST/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/build
 
+CGA/MED/cga_med_plot.obj: .SYMBOLIC
+CGA/MED/cga_med_plot.obj: CGA/MED/cga_med_plot.c.obj
+
+# target to build an object file
+CGA/MED/cga_med_plot.c.obj: .SYMBOLIC
+CGA/MED/cga_med_plot.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/MED/cga_med_plot.c.obj
+
+CGA/MED/cga_med_plot.i: .SYMBOLIC
+CGA/MED/cga_med_plot.i: CGA/MED/cga_med_plot.c.i
+
+# target to preprocess a source file
+CGA/MED/cga_med_plot.c.i: .SYMBOLIC
+CGA/MED/cga_med_plot.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/MED/cga_med_plot.c.i
+
+CGA/MED/cga_med_plot.s: .SYMBOLIC
+CGA/MED/cga_med_plot.s: CGA/MED/cga_med_plot.c.s
+
+# target to generate assembly for a file
+CGA/MED/cga_med_plot.c.s: .SYMBOLIC
+CGA/MED/cga_med_plot.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/MED/cga_med_plot.c.s
+
+CGA/cga_row_offsets.obj: .SYMBOLIC
+CGA/cga_row_offsets.obj: CGA/cga_row_offsets.c.obj
+
+# target to build an object file
+CGA/cga_row_offsets.c.obj: .SYMBOLIC
+CGA/cga_row_offsets.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_row_offsets.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_row_offsets.c.obj
+
+CGA/cga_row_offsets.i: .SYMBOLIC
+CGA/cga_row_offsets.i: CGA/cga_row_offsets.c.i
+
+# target to preprocess a source file
+CGA/cga_row_offsets.c.i: .SYMBOLIC
+CGA/cga_row_offsets.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_row_offsets.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_row_offsets.c.i
+
+CGA/cga_row_offsets.s: .SYMBOLIC
+CGA/cga_row_offsets.s: CGA/cga_row_offsets.c.s
+
+# target to generate assembly for a file
+CGA/cga_row_offsets.c.s: .SYMBOLIC
+CGA/cga_row_offsets.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_row_offsets.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_row_offsets.c.s
+
 CGA/cga_version.obj: .SYMBOLIC
 CGA/cga_version.obj: CGA/cga_version.c.obj
 
@@ -139,6 +190,7 @@ CGA/cga_version.obj: CGA/cga_version.c.obj
 CGA/cga_version.c.obj: .SYMBOLIC
 CGA/cga_version.c.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_version.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_version.c.obj
 
 CGA/cga_version.i: .SYMBOLIC
 CGA/cga_version.i: CGA/cga_version.c.i
@@ -147,6 +199,7 @@ CGA/cga_version.i: CGA/cga_version.c.i
 CGA/cga_version.c.i: .SYMBOLIC
 CGA/cga_version.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_version.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_version.c.i
 
 CGA/cga_version.s: .SYMBOLIC
 CGA/cga_version.s: CGA/cga_version.c.s
@@ -155,6 +208,7 @@ CGA/cga_version.s: CGA/cga_version.c.s
 CGA/cga_version.c.s: .SYMBOLIC
 CGA/cga_version.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_version.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_version.c.s
 
 TEST/test_cga.obj: .SYMBOLIC
 TEST/test_cga.obj: TEST/test_cga.c.obj
@@ -215,6 +269,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... CGALIB"
 	@echo "... TEST"
+	@echo "... CGA/MED/cga_med_plot.obj"
+	@echo "... CGA/MED/cga_med_plot.i"
+	@echo "... CGA/MED/cga_med_plot.s"
+	@echo "... CGA/cga_row_offsets.obj"
+	@echo "... CGA/cga_row_offsets.i"
+	@echo "... CGA/cga_row_offsets.s"
 	@echo "... CGA/cga_version.obj"
 	@echo "... CGA/cga_version.i"
 	@echo "... CGA/cga_version.s"

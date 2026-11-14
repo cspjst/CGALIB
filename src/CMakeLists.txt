@@ -38,6 +38,9 @@ file(GLOB CGA_SOURCES
 file(GLOB TEST_SOURCES
     CONFIGURE_DEPENDS
     *.c
+    CGA/*.c
+    CGA/MED/*.c
+    CGA/HIGH/*.c
     TEST/*.c
 )
 
