@@ -14,4 +14,15 @@
  */
 void cga_med_plot(uint32_t p, cga_med_colour_t c);
 
+/**
+ * @brief   Plot one pixel in medium resolution, calculating the row offset instead of using the table.
+ * @details Same contract as cga_med_plot. The offset is (y & 1) * 2000h + (y >> 1) * 80,
+ * computed with shifts and no MUL, which saves the 400-byte row table.
+ * Slower on an 8088: 76.1 us net per plot versus 59.9 us for the table (127%, 86Box XT).
+ * The extra code bytes cost more to fetch over the 8-bit bus than one table read.
+ * @param   p  packed point  i.e. y:x
+ * @param   c  pre-shifted pixel value, CGA_MED_BKGD .. CGA_MED_COL3
+ */
+void cga_med_plot_calc(uint32_t p, cga_med_colour_t c);
+
 #endif

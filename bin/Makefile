@@ -210,6 +210,30 @@ CGA/cga_version.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_version.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_version.c.s
 
+TEST/bench_cga.obj: .SYMBOLIC
+TEST/bench_cga.obj: TEST/bench_cga.c.obj
+
+# target to build an object file
+TEST/bench_cga.c.obj: .SYMBOLIC
+TEST/bench_cga.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_cga.c.obj
+
+TEST/bench_cga.i: .SYMBOLIC
+TEST/bench_cga.i: TEST/bench_cga.c.i
+
+# target to preprocess a source file
+TEST/bench_cga.c.i: .SYMBOLIC
+TEST/bench_cga.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_cga.c.i
+
+TEST/bench_cga.s: .SYMBOLIC
+TEST/bench_cga.s: TEST/bench_cga.c.s
+
+# target to generate assembly for a file
+TEST/bench_cga.c.s: .SYMBOLIC
+TEST/bench_cga.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_cga.c.s
+
 TEST/test_cga.obj: .SYMBOLIC
 TEST/test_cga.obj: TEST/test_cga.c.obj
 
@@ -278,6 +302,9 @@ help:
 	@echo "... CGA/cga_version.obj"
 	@echo "... CGA/cga_version.i"
 	@echo "... CGA/cga_version.s"
+	@echo "... TEST/bench_cga.obj"
+	@echo "... TEST/bench_cga.i"
+	@echo "... TEST/bench_cga.s"
 	@echo "... TEST/test_cga.obj"
 	@echo "... TEST/test_cga.i"
 	@echo "... TEST/test_cga.s"

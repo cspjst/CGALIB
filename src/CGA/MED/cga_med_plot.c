@@ -28,3 +28,41 @@ void cga_med_plot(uint32_t p, cga_med_colour_t c) {
         pop     es
     }
 }
+
+void cga_med_plot_calc(uint32_t p, cga_med_colour_t c) {
+    __asm {
+        mov     ax, word ptr p          ; AX = x (0..319)
+        mov     dx, word ptr p+2        ; DX = y (0..199), so DH = 0
+        mov     bl, c                   ; BL = colour, pre-shifted to bits 7-6
+
+        ; row offset = (y & 1) * 2000h + (y >> 1) * 80
+        shr     dx, 1                   ; CF = odd row, DX = y >> 1 (max 99, DH still 0)
+        sbb     di, di                  ; DI = 0000h or FFFFh
+        and     di, 2000h               ; DI = bank
+        xchg    dh, dl                  ; DX = (y >> 1) * 256
+        shr     dx, 1
+        shr     dx, 1                   ; DX = (y >> 1) * 64
+        add     di, dx
+        shr     dx, 1
+        shr     dx, 1                   ; DX = (y >> 1) * 16
+        add     di, dx                  ; DI = bank + (y >> 1) * 80
+
+        ; byte = x >> 2, shift = (x & 3) * 2
+        mov     cl, al
+        shr     ax, 1
+        shr     ax, 1
+        add     di, ax                  ; DI = byte offset in VRAM
+        and     cl, 3
+        shl     cl, 1                   ; CL = 0, 2, 4, 6
+        mov     al, 3Fh
+        ror     al, cl                  ; AL = mask that clears the target pixel
+        shr     bl, cl                  ; BL = colour moved into position
+
+        mov     dx, 0B800h
+        mov     es, dx
+        mov     ah, es:[di]             ; one VRAM read
+        and     ah, al
+        or      ah, bl
+        mov     es:[di], ah             ; one VRAM write
+    }
+}

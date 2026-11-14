@@ -1,0 +1,9 @@
+CGALIB!
+Benchmark: null, table, calc - ~10 s each in mode 04h...
+
+Plotter   plots  ticks  us/plot  net us/plot
+null      80896    183   124.2
+table     54272    182   184.1    59.9
+calc      50176    183   200.3    76.1
+calc/table (net): 127%
+

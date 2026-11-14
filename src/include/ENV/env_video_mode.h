@@ -9,7 +9,7 @@
 #ifndef ENV_VIDEO_MODE_H
 #define ENV_VIDEO_MODE_H
 
-#include "../include/BIOS/bios_video_services_constants.h"
+#include "../BIOS/bios_video_services_constants.h"
 
 /**
  * @brief   Set the BIOS video mode (clears the screen).
