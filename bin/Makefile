@@ -306,6 +306,30 @@ TEST/bench_cga.c.s: .SYMBOLIC
 TEST/bench_cga.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_cga.c.s
 
+TEST/bench_line.obj: .SYMBOLIC
+TEST/bench_line.obj: TEST/bench_line.c.obj
+
+# target to build an object file
+TEST/bench_line.c.obj: .SYMBOLIC
+TEST/bench_line.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_line.c.obj
+
+TEST/bench_line.i: .SYMBOLIC
+TEST/bench_line.i: TEST/bench_line.c.i
+
+# target to preprocess a source file
+TEST/bench_line.c.i: .SYMBOLIC
+TEST/bench_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_line.c.i
+
+TEST/bench_line.s: .SYMBOLIC
+TEST/bench_line.s: TEST/bench_line.c.s
+
+# target to generate assembly for a file
+TEST/bench_line.c.s: .SYMBOLIC
+TEST/bench_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_line.c.s
+
 TEST/test_cga.obj: .SYMBOLIC
 TEST/test_cga.obj: TEST/test_cga.c.obj
 
@@ -386,6 +410,9 @@ help:
 	@echo "... TEST/bench_cga.obj"
 	@echo "... TEST/bench_cga.i"
 	@echo "... TEST/bench_cga.s"
+	@echo "... TEST/bench_line.obj"
+	@echo "... TEST/bench_line.i"
+	@echo "... TEST/bench_line.s"
 	@echo "... TEST/test_cga.obj"
 	@echo "... TEST/test_cga.i"
 	@echo "... TEST/test_cga.s"

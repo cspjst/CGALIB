@@ -420,6 +420,86 @@ static void test_cga_hi_vline_dump() {
     assert(fixed_changed == VLINE_FIXED_BYTES);
 }
 
+#define BLINE_RANDOM        64
+#define BLINE_FIXED_BYTES   689     /* bytes the fixed cases change over a 55h prefill (host reference) */
+
+/* CGABLINE.TXT: fixed cases covering every path, then random lines, over a 55h prefill */
+static void test_cga_hi_bresenham_dump() {
+    static const cga_hi_colour_t colours[2] = { CGA_HI_BLACK, CGA_HI_COLOUR };
+    /* { x0, y0, x1, y1, colour index 0 = black, 1 = colour } */
+    static const uint16_t cases[][5] = {
+        {   5,   5,   5,   5, 1 },  /* single point: hline path, len 1 */
+        {  10,  20, 100,  20, 1 },  /* horizontal */
+        { 100,  23,  10,  23, 0 },  /* horizontal, reversed, black */
+        { 200,  10, 200,  60, 1 },  /* vertical */
+        { 203,  60, 203,  10, 0 },  /* vertical, reversed, black */
+        { 300,   0, 399,  99, 1 },  /* 45 degrees down-right */
+        { 300, 199, 399, 100, 0 },  /* 45 degrees up-right, black */
+        {   0, 100, 639, 150, 1 },  /* x-major, y++, full width */
+        {   0, 199, 639, 160, 0 },  /* x-major, y--, full width, black */
+        { 450,   0, 500, 199, 1 },  /* y-major, x++, full height */
+        { 600,   0, 550, 199, 0 },  /* y-major, x--, full height, black */
+        {  20, 120,  30, 131, 1 },  /* just steeper than 45 */
+        {  40, 120,  51, 130, 0 },  /* just shallower than 45, black */
+        { 120,  30, 180,  90, 1 },  /* reverse twins: a second pass must add nothing */
+        { 180,  90, 120,  30, 1 },
+        { 250, 180, 200, 120, 1 },
+        { 200, 120, 250, 180, 1 },
+        { 620,   5, 630,  40, 1 },  /* right edge, steep */
+        { 630,  40, 620,   5, 1 }
+    };
+    const unsigned n_cases = sizeof(cases) / sizeof(cases[0]);
+    bios_video_mode_t original;
+    cga_point_t p1, p2;
+    uint16_t s = CGA_DUMP_SEED;
+    unsigned i, off;
+    unsigned fixed_changed = 0;
+    char header[80];
+    int ok;
+
+    wait_key_cga("Mode 06h Bresenham dump - press a key...\n");
+    original = env_set_video_mode(BIOS_CGA_GRAPHICS_MONOCHROME_640X200);
+
+    /* 1. prefill: also leaves DS = B800h for the calls below */
+    cga_fill_vram_bytes(CGA_DUMP_FILL);
+
+    /* 2. fixed cases: every path, both colours, both directions */
+    for (i = 0; i < n_cases; ++i) {
+        p1.x = cases[i][0];
+        p1.y = cases[i][1];
+        p2.x = cases[i][2];
+        p2.y = cases[i][3];
+        cga_hi_bresenham_line(p1.u, p2.u, colours[cases[i][4]]);
+    }
+
+    /* 3. checkpoint: did the fixed cases draw? */
+    for (off = 0; off < CGA_VRAM_SIZE; ++off)
+        if (vram[off] != CGA_DUMP_FILL) ++fixed_changed;
+
+    /* 4. random lines */
+    for (i = 0; i < BLINE_RANDOM; ++i) {
+        p1.x = (cga_dump_rand(&s) >> 4) % 640;
+        p1.y = (cga_dump_rand(&s) >> 4) % 200;
+        p2.x = (cga_dump_rand(&s) >> 4) % 640;
+        p2.y = (cga_dump_rand(&s) >> 4) % 200;
+        cga_hi_bresenham_line(p1.u, p2.u, colours[cga_dump_rand(&s) >> 15]);
+    }
+
+    /* 5. dump */
+    sprintf(header, "bline seed %04X cases %u random %u fill %02X gen hi",
+            CGA_DUMP_SEED, n_cases, BLINE_RANDOM, CGA_DUMP_FILL);
+    ok = cga_dump_vram("CGABLINE.TXT", header);
+
+    wait_key_cga("");
+    env_set_video_mode(original);
+
+    printf("Fixed cases changed %u bytes (expect %u): %s\n",
+           fixed_changed, BLINE_FIXED_BYTES,
+           fixed_changed == BLINE_FIXED_BYTES ? "ok" : "FAIL");
+    printf("CGABLINE.TXT %s\n\n", ok ? "written" : "FAILED");
+    assert(fixed_changed == BLINE_FIXED_BYTES);
+}
+
 void test_cga() {
     printf("Test CGALIB...\n");
     //test_cga_versions();
@@ -428,5 +508,6 @@ void test_cga() {
     //test_cga_hi_plot_dump();
     //test_cga_hi_vram();
     //test_cga_hi_hline_dump();
-    test_cga_hi_vline_dump();
+    //test_cga_hi_vline_dump();
+    test_cga_hi_bresenham_dump();
 }
