@@ -1,11 +1,50 @@
 ```
- ██████╗ ██████╗  █████╗ ██╗     ██╗██████╗ 
-██╔════╝██╔════╝ ██╔══██╗██║     ██║██╔══██╗
-██║     ██║  ███╗███████║██║     ██║██████╔╝
-██║     ██║   ██║██╔══██║██║     ██║██╔══██╗
-╚██████╗╚██████╔╝██║  ██║███████╗██║██████╔╝
- ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝╚═════╝
- © Jeremy Simon Thornton 2026 v @PROJECT_VERSION@
-```
 # CGALIB
 A C library for programming IBM CGA graphics and text modes on the IBM PC/XT, built with Open Watcom.
+
+## Gallery
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="img/cga_plot.png" width="300"> | | |
+| `cga_med_plot`: 1,024 random points, palette 1, 86Box IBM XT | | |
+
+## Plotting performance
+
+### Correctness first: dump and diff
+Before any timing, `cga_med_plot` was verified with a dump-and-diff test:
+- Plot 256 pseudo-random points (fixed 16-bit LCG, seed `1234h`) in mode 04h.
+- Write all 16 KB of CGA VRAM to `CGADUMP.TXT`.
+- Diff the dump against a reference image generated independently on the host.
+
+Result: **0 differing bytes** in both interlaced banks, including the unused 192 bytes at the end of each bank, so there are no stray writes.
+Every plot routine is verified this way before it's benchmarked.
+
+### Benchmark: table versus calculated row offset
+Two mode 04h plotters were compared:
+
+| Plotter | Row offset |
+|---|---|
+| `cga_med_plot` | 200-entry lookup table, `CGA_ROW_OFFSETS` |
+| `cga_med_plot_calc` | `(y & 1) * 2000h + (y >> 1) * 80`, worked out with shifts, no `MUL` |
+
+Method (`test_cga_bench`):
+- Each plotter runs for 182 BIOS ticks (about 10 s) over the same 1,024 pre-generated points.
+- Calls go through a function pointer, so the call cost is the same for every plotter.
+- A null plotter with the same signature measures the loop and call overhead, which is then subtracted to give net plot time.
+- Timing uses INT 1Ah via BIOSLIB `bios_read_system_clock`.
+
+Results, in µs per plot:
+
+| | 86Box (IBM XT, 4.77 MHz) | DOSBox-X |
+|---|---|---|
+| Call + loop overhead | 124.2 | 105.5 |
+| Table, net | **59.9** | 60.8 |
+| Calc, net | 76.1 | 94.8 |
+| Calc / table | 127% | 155% |
+
+### Outcomes
+1. **The lookup table wins.** On an 8088, code bytes are expensive, because each one costs about 4 cycles to fetch over the 8-bit bus. The calculated version's extra ~20 bytes of shifts cost more than one table read from DGROUP, about 16 µs, or ~77 cycles. The 400-byte table earns its keep.
+2. **Call overhead dominates.** Calling the plotter costs about twice as much as plotting the pixel. Any routine that plots in a loop should run the loop inside the library, not around calls to `cga_med_plot`. That's the case for `cga_med_plot_points` (one call per array of points) and for an inline or incremental plot inside line drawing.
+3. **The packed point type is part of the speed.** A `uint32_t` y:x point arrives in DX:AX for a single plot. Point arrays are flat runs of 4-byte words that `lodsw` / `lodsw` walk in two bytes of code.
+4. **Use 86Box, not DOSBox-X, for timing.** DOSBox-X overstated the calc penalty and understated the call overhead. 86Box's cycle-accurate XT gives the figures quoted in the library docs. Final confirmation is on real IBM XT hardware.
