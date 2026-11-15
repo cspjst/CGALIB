@@ -13,7 +13,7 @@ void cga_hi_cls() {
         mov     di, CGA_VIDEO_RAM_SEGMENT
         mov     es, di
         xor     di, di
-        mov     cx, CGA_SCREEN_WORDS        ; 2000h words
+        mov     cx, CGA_VRAM_WORDS
         xor     ax, ax                      ; black
         rep     stosw                       ; store AX full screen VRAM
 
@@ -38,7 +38,7 @@ CLS:    mov     ah, al                      ; duplicate colour byte
         mov     di, CGA_VIDEO_RAM_SEGMENT
         mov     es, di
         xor     di, di
-        mov     cx, CGA_SCREEN_WORDS        ; 2000h words
+        mov     cx, CGA_VRAM_WORDS
         rep     stosw                       ; store AX full screen VRAM
 
         popf
