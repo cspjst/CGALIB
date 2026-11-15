@@ -8,10 +8,12 @@ void cga_med_plot(uint32_t p, cga_med_colour_t c) {
     __asm {
         push    es
 
-        mov     cx, CGA_VIDEO_RAM_SEGMENT   ; load the VRAM segment address
-        mov     es, cx                      ; transer segment into es
+        mov     di, CGA_VIDEO_RAM_SEGMENT   ; load the VRAM segment address
+        mov     es, di                      ; transer segment into es
         xchg    bx, dx                      ; DL = colour BX = y
         shl     bx, 1                       ; turn y into a word table index
+        mov     di, seg CGA_ROW_OFFSETS     ; load the TABLE segment address
+        mov     ds, di                      ; transer segment into DS
         mov     bx, CGA_ROW_OFFSETS[bx]     ; load the VRAM row offset address
         mov     cx, ax                      ; copy of x in CX
         and     cx, 3h                      ; mask off 0011 lower bits i.e.mod 4 pixels per byte

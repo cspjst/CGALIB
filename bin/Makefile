@@ -132,6 +132,30 @@ TEST/fast: .SYMBOLIC
 TEST/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/build
 
+CGA/HI/cga_hi_line.obj: .SYMBOLIC
+CGA/HI/cga_hi_line.obj: CGA/HI/cga_hi_line.c.obj
+
+# target to build an object file
+CGA/HI/cga_hi_line.c.obj: .SYMBOLIC
+CGA/HI/cga_hi_line.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_line.c.obj
+
+CGA/HI/cga_hi_line.i: .SYMBOLIC
+CGA/HI/cga_hi_line.i: CGA/HI/cga_hi_line.c.i
+
+# target to preprocess a source file
+CGA/HI/cga_hi_line.c.i: .SYMBOLIC
+CGA/HI/cga_hi_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_line.c.i
+
+CGA/HI/cga_hi_line.s: .SYMBOLIC
+CGA/HI/cga_hi_line.s: CGA/HI/cga_hi_line.c.s
+
+# target to generate assembly for a file
+CGA/HI/cga_hi_line.c.s: .SYMBOLIC
+CGA/HI/cga_hi_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_line.c.s
+
 CGA/HI/cga_hi_plot.obj: .SYMBOLIC
 CGA/HI/cga_hi_plot.obj: CGA/HI/cga_hi_plot.c.obj
 
@@ -155,30 +179,6 @@ CGA/HI/cga_hi_plot.s: CGA/HI/cga_hi_plot.c.s
 CGA/HI/cga_hi_plot.c.s: .SYMBOLIC
 CGA/HI/cga_hi_plot.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_plot.c.s
-
-CGA/HI/cga_hi_vline.obj: .SYMBOLIC
-CGA/HI/cga_hi_vline.obj: CGA/HI/cga_hi_vline.c.obj
-
-# target to build an object file
-CGA/HI/cga_hi_vline.c.obj: .SYMBOLIC
-CGA/HI/cga_hi_vline.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_vline.c.obj
-
-CGA/HI/cga_hi_vline.i: .SYMBOLIC
-CGA/HI/cga_hi_vline.i: CGA/HI/cga_hi_vline.c.i
-
-# target to preprocess a source file
-CGA/HI/cga_hi_vline.c.i: .SYMBOLIC
-CGA/HI/cga_hi_vline.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_vline.c.i
-
-CGA/HI/cga_hi_vline.s: .SYMBOLIC
-CGA/HI/cga_hi_vline.s: CGA/HI/cga_hi_vline.c.s
-
-# target to generate assembly for a file
-CGA/HI/cga_hi_vline.c.s: .SYMBOLIC
-CGA/HI/cga_hi_vline.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_vline.c.s
 
 CGA/HI/cga_hi_vram.obj: .SYMBOLIC
 CGA/HI/cga_hi_vram.obj: CGA/HI/cga_hi_vram.c.obj
@@ -365,12 +365,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... CGALIB"
 	@echo "... TEST"
+	@echo "... CGA/HI/cga_hi_line.obj"
+	@echo "... CGA/HI/cga_hi_line.i"
+	@echo "... CGA/HI/cga_hi_line.s"
 	@echo "... CGA/HI/cga_hi_plot.obj"
 	@echo "... CGA/HI/cga_hi_plot.i"
 	@echo "... CGA/HI/cga_hi_plot.s"
-	@echo "... CGA/HI/cga_hi_vline.obj"
-	@echo "... CGA/HI/cga_hi_vline.i"
-	@echo "... CGA/HI/cga_hi_vline.s"
 	@echo "... CGA/HI/cga_hi_vram.obj"
 	@echo "... CGA/HI/cga_hi_vram.i"
 	@echo "... CGA/HI/cga_hi_vram.s"
