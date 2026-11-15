@@ -2,8 +2,8 @@
 #define CGA_VERSION_H
 
 #define CGA_VERSION_MAJOR  0
-#define CGA_VERSION_MINOR  0
-#define CGA_VERSION_PATCH  1
+#define CGA_VERSION_MINOR  1
+#define CGA_VERSION_PATCH  9
 
 /**
  * single comparable value: 0xMMmm (major high byte, minor low byte)
@@ -11,7 +11,7 @@
  */
 #define CGA_VERSION        ((CGA_VERSION_MAJOR << 8) | CGA_VERSION_MINOR)
 
-#define CGA_VERSION_STRING "0.0.1"
+#define CGA_VERSION_STRING "0.1.9"
 
 #define CGA_MIN_BIOS_VERSION 0x0009
 
