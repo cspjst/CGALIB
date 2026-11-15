@@ -132,6 +132,54 @@ TEST/fast: .SYMBOLIC
 TEST/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/build
 
+CGA/HI/cga_hi_plot.obj: .SYMBOLIC
+CGA/HI/cga_hi_plot.obj: CGA/HI/cga_hi_plot.c.obj
+
+# target to build an object file
+CGA/HI/cga_hi_plot.c.obj: .SYMBOLIC
+CGA/HI/cga_hi_plot.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_plot.c.obj
+
+CGA/HI/cga_hi_plot.i: .SYMBOLIC
+CGA/HI/cga_hi_plot.i: CGA/HI/cga_hi_plot.c.i
+
+# target to preprocess a source file
+CGA/HI/cga_hi_plot.c.i: .SYMBOLIC
+CGA/HI/cga_hi_plot.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_plot.c.i
+
+CGA/HI/cga_hi_plot.s: .SYMBOLIC
+CGA/HI/cga_hi_plot.s: CGA/HI/cga_hi_plot.c.s
+
+# target to generate assembly for a file
+CGA/HI/cga_hi_plot.c.s: .SYMBOLIC
+CGA/HI/cga_hi_plot.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_plot.c.s
+
+CGA/HI/cga_hi_vram.obj: .SYMBOLIC
+CGA/HI/cga_hi_vram.obj: CGA/HI/cga_hi_vram.c.obj
+
+# target to build an object file
+CGA/HI/cga_hi_vram.c.obj: .SYMBOLIC
+CGA/HI/cga_hi_vram.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_vram.c.obj
+
+CGA/HI/cga_hi_vram.i: .SYMBOLIC
+CGA/HI/cga_hi_vram.i: CGA/HI/cga_hi_vram.c.i
+
+# target to preprocess a source file
+CGA/HI/cga_hi_vram.c.i: .SYMBOLIC
+CGA/HI/cga_hi_vram.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_vram.c.i
+
+CGA/HI/cga_hi_vram.s: .SYMBOLIC
+CGA/HI/cga_hi_vram.s: CGA/HI/cga_hi_vram.c.s
+
+# target to generate assembly for a file
+CGA/HI/cga_hi_vram.c.s: .SYMBOLIC
+CGA/HI/cga_hi_vram.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_vram.c.s
+
 CGA/MED/cga_med_plot.obj: .SYMBOLIC
 CGA/MED/cga_med_plot.obj: CGA/MED/cga_med_plot.c.obj
 
@@ -293,6 +341,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... CGALIB"
 	@echo "... TEST"
+	@echo "... CGA/HI/cga_hi_plot.obj"
+	@echo "... CGA/HI/cga_hi_plot.i"
+	@echo "... CGA/HI/cga_hi_plot.s"
+	@echo "... CGA/HI/cga_hi_vram.obj"
+	@echo "... CGA/HI/cga_hi_vram.i"
+	@echo "... CGA/HI/cga_hi_vram.s"
 	@echo "... CGA/MED/cga_med_plot.obj"
 	@echo "... CGA/MED/cga_med_plot.i"
 	@echo "... CGA/MED/cga_med_plot.s"

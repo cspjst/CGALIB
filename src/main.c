@@ -5,7 +5,7 @@
 
 int main() {
     printf("CGALIB!\n");
-    //test_cga();
-    test_cga_bench();
+    test_cga();
+    //test_cga_bench();
     return 0;
 }

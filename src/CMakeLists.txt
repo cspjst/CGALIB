@@ -40,7 +40,7 @@ file(GLOB TEST_SOURCES
     *.c
     CGA/*.c
     CGA/MED/*.c
-    CGA/HIGH/*.c
+    CGA/HI/*.c
     TEST/*.c
 )
 

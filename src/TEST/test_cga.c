@@ -16,6 +16,9 @@
 #include "../CGA/cga_types.h"
 #include "../CGA/MED/cga_med_plot.h"
 
+#include "../CGA/HI/cga_hi_plot.h"
+#include "../CGA/HI/cga_hi_vram.h"
+
 
 // vendored headers and .LIBs must come from the same build
 void test_cga_versions() {
@@ -154,11 +157,86 @@ void test_cga_med_plot_dump() {
     printf("CGADUMP.TXT %s\n\n", f ? "written" : "FAILED");
 }
 
+/* plots CGA_DUMP_POINTS pseudo-random pixels in 640x200 over a 55h prefill, then writes all 16K of VRAM as hex to CGAHDUMP.TXT */
+#define CGA_DUMP_FILL 0x55      /* alternate bits: plots of either colour set or clear something */
+
+void test_cga_hi_plot_dump() {
+    volatile unsigned char far* vram = (volatile unsigned char far*)0xB8000000L;
+    static const cga_hi_colour_t colours[2] = { CGA_HI_BLACK, CGA_HI_COLOUR };
+    bios_video_mode_t original;
+    cga_point_t p;
+    uint16_t s = CGA_DUMP_SEED;
+    unsigned i, off;
+    FILE* f;
+
+    wait_key_cga("Mode 06h next - press a key...\n");
+    original = env_set_video_mode(BIOS_CGA_GRAPHICS_MONOCHROME_640X200);
+
+    for (off = 0; off < 0x4000; ++off) vram[off] = CGA_DUMP_FILL;
+
+    for (i = 0; i < CGA_DUMP_POINTS; ++i) {
+        p.x = cga_dump_rand(&s) % 640;
+        p.y = cga_dump_rand(&s) % 200;
+        cga_hi_plot(p.u, colours[cga_dump_rand(&s) >> 15]);
+    }
+
+    f = fopen("CGAHDUMP.TXT", "w");
+    if (f) {
+        fprintf(f, "seed %04X points %u hi fill %02X\n", CGA_DUMP_SEED, CGA_DUMP_POINTS, CGA_DUMP_FILL);
+        for (off = 0; off < 0x4000; ++off) {
+            if ((off & 31) == 0) fprintf(f, "%04X:", off);
+            fprintf(f, " %02X", vram[off]);
+            if ((off & 31) == 31) fprintf(f, "\n");
+        }
+        fclose(f);
+    }
+
+    wait_key_cga("");
+    env_set_video_mode(original);
+    printf("CGAHDUMP.TXT %s\n\n", f ? "written" : "FAILED");
+}
+
+void test_cga_hi_vram() {
+    volatile unsigned char far* vram = (volatile unsigned char far*)0xB8000000L;
+    bios_video_mode_t original;
+    unsigned off;
+    unsigned bad_even = 0, bad_odd = 0;
+
+    wait_key_cga("Mode 06h VRAM tests - press a key...\n");
+    original = env_set_video_mode(BIOS_CGA_GRAPHICS_MONOCHROME_640X200);
+
+    cga_hi_cls_colour(CGA_HI_COLOUR);
+    wait_key_cga("");
+    cga_hi_cls_colour(CGA_HI_BLACK);
+    wait_key_cga("");
+    cga_hi_cls_colour(CGA_HI_COLOUR);
+    wait_key_cga("");
+    cga_hi_cls();
+    wait_key_cga("");
+    cga_hi_fill_vram(0x5555, 0xAAAA);
+    wait_key_cga("");
+
+    /* byte order: little-endian, so low byte at the lower address */
+    cga_hi_fill_vram(0x1234, 0x5678);
+    for (off = 0; off < 0x1F40; off += 2) {
+        if (vram[off] != 0x34 || vram[off + 1] != 0x12) ++bad_even;
+        if (vram[0x2000 + off] != 0x78 || vram[0x2000 + off + 1] != 0x56) ++bad_odd;
+    }
+    wait_key_cga("");   /* visual: fine diagonal-ish texture, different on alternate rows */
+
+    env_set_video_mode(original);
+
+    printf("fill_vram byte order: even bank %u errors, odd bank %u errors\n", bad_even, bad_odd);
+    assert(bad_even == 0);
+    assert(bad_odd == 0);
+    printf("cga_hi_fill_vram byte order: PASS\n\n");
+}
+
 void test_cga() {
     printf("Test CGALIB...\n");
     //test_cga_versions();
-    test_cga_med_plot_dump();
-    // test_cga_hi_plot();
-    // test_cga_med_cls();
-    // test_cga_hi_cls();
+    //test_cga_med_plot_dump();
+    //test_cga_hi_plot_dump();
+    // test_cga_med_vram();
+    test_cga_hi_vram();
 }
