@@ -15,7 +15,7 @@
 #include "../CGA/MED/cga_med_colours.h"
 #include "../CGA/MED/cga_med_plot.h"
 
-#define BENCH_HAVE_MED_BRESENHAM 0          /* 1 once cga_med_bresenham_line exists */
+#define BENCH_HAVE_MED_BRESENHAM 1          /* 1 once cga_med_bresenham_line exists */
 
 #if BENCH_HAVE_MED_BRESENHAM
 #include "../CGA/MED/cga_med_line.h"
@@ -97,7 +97,7 @@ void bench_med_line() {
 
     /* 1. naive: colour 3 on background, then background on colour 3 */
     cga_fill_vram_byte(0x00);
-    t_naive_col = bench_run(bench_naive_line, CGA_MED_COL3);
+    t_naive_col = bench_run(bench_naive_line, CGA_MED_COL2);
     bench_wait_key("");
     cga_fill_vram_byte(0xFF);
     t_naive_bkg = bench_run(bench_naive_line, CGA_MED_BKGD);
@@ -106,7 +106,7 @@ void bench_med_line() {
 #if BENCH_HAVE_MED_BRESENHAM
     /* 2. optimised: same again */
     cga_fill_vram_byte(0x00);
-    t_fast_col = bench_run(cga_med_bresenham_line, CGA_MED_COL3);
+    t_fast_col = bench_run(cga_med_bresenham_line, CGA_MED_COL2);
     bench_wait_key("");
     cga_fill_vram_byte(0xFF);
     t_fast_bkg = bench_run(cga_med_bresenham_line, CGA_MED_BKGD);

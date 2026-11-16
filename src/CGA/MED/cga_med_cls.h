@@ -7,8 +7,8 @@
 
 #include "cga_med_colours.h"
 
-void cga_hi_cls();
+void cga_med_cls();
 
-void cga_hi_cls_colour(cga_med_colour_t c);
+void cga_med_cls_colour(cga_med_colour_t c);
 
 #endif

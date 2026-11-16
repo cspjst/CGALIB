@@ -132,6 +132,126 @@ TEST/fast: .SYMBOLIC
 TEST/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/build
 
+BENCH/bench_cga.obj: .SYMBOLIC
+BENCH/bench_cga.obj: BENCH/bench_cga.c.obj
+
+# target to build an object file
+BENCH/bench_cga.c.obj: .SYMBOLIC
+BENCH/bench_cga.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_cga.c.obj
+
+BENCH/bench_cga.i: .SYMBOLIC
+BENCH/bench_cga.i: BENCH/bench_cga.c.i
+
+# target to preprocess a source file
+BENCH/bench_cga.c.i: .SYMBOLIC
+BENCH/bench_cga.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_cga.c.i
+
+BENCH/bench_cga.s: .SYMBOLIC
+BENCH/bench_cga.s: BENCH/bench_cga.c.s
+
+# target to generate assembly for a file
+BENCH/bench_cga.c.s: .SYMBOLIC
+BENCH/bench_cga.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_cga.c.s
+
+BENCH/bench_hi_line.obj: .SYMBOLIC
+BENCH/bench_hi_line.obj: BENCH/bench_hi_line.c.obj
+
+# target to build an object file
+BENCH/bench_hi_line.c.obj: .SYMBOLIC
+BENCH/bench_hi_line.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_hi_line.c.obj
+
+BENCH/bench_hi_line.i: .SYMBOLIC
+BENCH/bench_hi_line.i: BENCH/bench_hi_line.c.i
+
+# target to preprocess a source file
+BENCH/bench_hi_line.c.i: .SYMBOLIC
+BENCH/bench_hi_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_hi_line.c.i
+
+BENCH/bench_hi_line.s: .SYMBOLIC
+BENCH/bench_hi_line.s: BENCH/bench_hi_line.c.s
+
+# target to generate assembly for a file
+BENCH/bench_hi_line.c.s: .SYMBOLIC
+BENCH/bench_hi_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_hi_line.c.s
+
+BENCH/bench_hi_plot.obj: .SYMBOLIC
+BENCH/bench_hi_plot.obj: BENCH/bench_hi_plot.c.obj
+
+# target to build an object file
+BENCH/bench_hi_plot.c.obj: .SYMBOLIC
+BENCH/bench_hi_plot.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_hi_plot.c.obj
+
+BENCH/bench_hi_plot.i: .SYMBOLIC
+BENCH/bench_hi_plot.i: BENCH/bench_hi_plot.c.i
+
+# target to preprocess a source file
+BENCH/bench_hi_plot.c.i: .SYMBOLIC
+BENCH/bench_hi_plot.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_hi_plot.c.i
+
+BENCH/bench_hi_plot.s: .SYMBOLIC
+BENCH/bench_hi_plot.s: BENCH/bench_hi_plot.c.s
+
+# target to generate assembly for a file
+BENCH/bench_hi_plot.c.s: .SYMBOLIC
+BENCH/bench_hi_plot.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_hi_plot.c.s
+
+BENCH/bench_med_line.obj: .SYMBOLIC
+BENCH/bench_med_line.obj: BENCH/bench_med_line.c.obj
+
+# target to build an object file
+BENCH/bench_med_line.c.obj: .SYMBOLIC
+BENCH/bench_med_line.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_med_line.c.obj
+
+BENCH/bench_med_line.i: .SYMBOLIC
+BENCH/bench_med_line.i: BENCH/bench_med_line.c.i
+
+# target to preprocess a source file
+BENCH/bench_med_line.c.i: .SYMBOLIC
+BENCH/bench_med_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_med_line.c.i
+
+BENCH/bench_med_line.s: .SYMBOLIC
+BENCH/bench_med_line.s: BENCH/bench_med_line.c.s
+
+# target to generate assembly for a file
+BENCH/bench_med_line.c.s: .SYMBOLIC
+BENCH/bench_med_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_med_line.c.s
+
+BENCH/bench_med_plot.obj: .SYMBOLIC
+BENCH/bench_med_plot.obj: BENCH/bench_med_plot.c.obj
+
+# target to build an object file
+BENCH/bench_med_plot.c.obj: .SYMBOLIC
+BENCH/bench_med_plot.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_med_plot.c.obj
+
+BENCH/bench_med_plot.i: .SYMBOLIC
+BENCH/bench_med_plot.i: BENCH/bench_med_plot.c.i
+
+# target to preprocess a source file
+BENCH/bench_med_plot.c.i: .SYMBOLIC
+BENCH/bench_med_plot.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_med_plot.c.i
+
+BENCH/bench_med_plot.s: .SYMBOLIC
+BENCH/bench_med_plot.s: BENCH/bench_med_plot.c.s
+
+# target to generate assembly for a file
+BENCH/bench_med_plot.c.s: .SYMBOLIC
+BENCH/bench_med_plot.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_med_plot.c.s
+
 CGA/HI/cga_hi_cls.obj: .SYMBOLIC
 CGA/HI/cga_hi_cls.obj: CGA/HI/cga_hi_cls.c.obj
 
@@ -464,6 +584,21 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... CGALIB"
 	@echo "... TEST"
+	@echo "... BENCH/bench_cga.obj"
+	@echo "... BENCH/bench_cga.i"
+	@echo "... BENCH/bench_cga.s"
+	@echo "... BENCH/bench_hi_line.obj"
+	@echo "... BENCH/bench_hi_line.i"
+	@echo "... BENCH/bench_hi_line.s"
+	@echo "... BENCH/bench_hi_plot.obj"
+	@echo "... BENCH/bench_hi_plot.i"
+	@echo "... BENCH/bench_hi_plot.s"
+	@echo "... BENCH/bench_med_line.obj"
+	@echo "... BENCH/bench_med_line.i"
+	@echo "... BENCH/bench_med_line.s"
+	@echo "... BENCH/bench_med_plot.obj"
+	@echo "... BENCH/bench_med_plot.i"
+	@echo "... BENCH/bench_med_plot.s"
 	@echo "... CGA/HI/cga_hi_cls.obj"
 	@echo "... CGA/HI/cga_hi_cls.i"
 	@echo "... CGA/HI/cga_hi_cls.s"

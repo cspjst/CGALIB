@@ -42,6 +42,7 @@ file(GLOB TEST_SOURCES
     CGA/MED/*.c
     CGA/HI/*.c
     TEST/*.c
+    BENCH/*.c
 )
 
 # Versioning
