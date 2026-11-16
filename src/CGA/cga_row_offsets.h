@@ -1,3 +1,7 @@
+/**
+ *  @author      Jeremy Simon Thornton
+ *  @copyright   2026 Jeremy Simon Thornton
+ */
 #ifndef CGA_ROW_OFFSETS_H
 #define CGA_ROW_OFFSETS_H
 

@@ -122,12 +122,52 @@ static void test_cga_med_plot_dump() {
     printf("CGAMDUMP.TXT %s\n\n", ok ? "written" : "FAILED");
 }
 
-/* ---------------------------------------------------------------- runner */
+/* cls and cls_colour: every visible byte checked, each over a 1Bh prefill so a no-op fails */
+static void test_cga_med_cls() {
+    static const cga_med_colour_t colours[4] = {
+        CGA_MED_BKGD, CGA_MED_COL1, CGA_MED_COL2, CGA_MED_COL3
+    };
+    /* colour repeated across all 4 pixels of a byte: 00 / 01010101 / 10101010 / 11111111 */
+    static const unsigned char fills[4] = { 0x00, 0x55, 0xAA, 0xFF };
+    bios_video_mode_t original;
+    unsigned bad_colour[4], bad_cls, off, i;
+    unsigned bad_cls_gaps = 0;
+
+    test_wait_key("Mode 04h cls tests - press a key...\n");
+    original = env_set_video_mode(BIOS_CGA_GRAPHICS_4_COLOUR_320X200);
+
+    for (i = 0; i < 4; ++i) {
+        test_prefill(TEST_MED_FILL);
+        cga_med_cls_colour(colours[i]);
+        bad_colour[i] = test_count_visible_not(fills[i]);
+        test_wait_key("");                              /* visual: whole screen in colour i */
+    }
+
+    test_prefill(TEST_MED_FILL);
+    cga_med_cls();
+    bad_cls = test_count_visible_not(0x00);
+    for (off = TEST_BANK_BYTES; off < TEST_ODD_BANK; ++off) {     /* cls clears the gaps too */
+        if (test_vram[off] != 0x00) ++bad_cls_gaps;
+        if (test_vram[TEST_ODD_BANK + off] != 0x00) ++bad_cls_gaps;
+    }
+    test_wait_key("");                                  /* visual: background */
+
+    env_set_video_mode(original);
+
+    for (i = 0; i < 4; ++i)
+        printf("cls_colour(%u): %u errors\n", i, bad_colour[i]);
+    printf("cls:           %u errors, gaps %u errors\n", bad_cls, bad_cls_gaps);
+    for (i = 0; i < 4; ++i)
+        assert(bad_colour[i] == 0);
+    assert(bad_cls == 0);
+    assert(bad_cls_gaps == 0);
+    printf("cga_med_cls: PASS\n\n");
+}
 
 void test_cga_med() {
     //test_cga_med_plot();
     //test_cga_med_plot_dump();
-    //test_cga_med_cls();             to come: all 4 colours, 1Bh prefill
+    test_cga_med_cls();
     //test_cga_med_hline_dump();      to come: 1Bh prefill, all 4 colours, every pixel position in a byte
     //test_cga_med_vline_dump();      to come
     //test_cga_med_bresenham_dump();  to come

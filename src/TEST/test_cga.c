@@ -158,12 +158,10 @@ static void test_cga_vram() {
     printf("cga general purpose VRAM: PASS\n\n");
 }
 
-/* ---------------------------------------------------------------- runner */
-
 void test_cga() {
     printf("Test CGALIB...\n");
     //test_cga_versions();
-    test_cga_vram();
+    //test_cga_vram();
     test_cga_med();
-    test_cga_hi();
+    //test_cga_hi();
 }

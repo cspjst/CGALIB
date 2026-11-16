@@ -16,8 +16,6 @@
 
 #include "../CGA/cga_types.h"
 
-/* ---------------------------------------------------------------- helpers */
-
 void bench_wait_key(const char* msg) {
     bios_key_t key;
     printf("%s", msg);
@@ -56,8 +54,6 @@ void bench_rays_init(uint16_t cx, uint16_t cy, uint16_t rx, uint16_t ry,
         ends[a] = p.u;
     }
 }
-
-/* ---------------------------------------------------------------- runner */
 
 void bench_cga() {
     printf("Bench CGALIB...\n");

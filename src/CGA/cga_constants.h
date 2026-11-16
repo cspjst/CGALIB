@@ -1,11 +1,11 @@
-#ifndef CGA_CONSTANTS_H
-#define CGA_CONSTANTS_H
-
 /**
- *  @file    cga_constants.h
+ *  @author      Jeremy Simon Thornton
+ *  @copyright   2026 Jeremy Simon Thornton
  *  @brief   CGA video memory layout and I/O ports for the graphics modes.
  *  @details Values use C hex notation, valid both in C and inside Watcom __asm blocks.
  */
+#ifndef CGA_CONSTANTS_H
+#define CGA_CONSTANTS_H
 
 /**
  *  @name    Video memory
