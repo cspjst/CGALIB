@@ -6,9 +6,9 @@
  *               for each line routine, timed with the BIOS tick counter (INT 1Ah).
  *               Ray end points are calculated once with sin / cos before any timing starts.
  */
-#ifndef BENCH_LINE_H
-#define BENCH_LINE_H
+#ifndef BENCH_HI_LINE_H
+#define BENCH_HI_LINE_H
 
-void bench_line();
+void bench_hi_line();
 
 #endif

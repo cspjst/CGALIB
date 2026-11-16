@@ -49,13 +49,13 @@ HL0:    // 1. set up VRAM segment in ES
         // 5. CX = rhs byte - lhs byte: 0 same byte, 1 same word, else general case
         mov     cx, ax                                      ; CX = x1
         sub     cx, bx                                      ; CX = x1 - x0
-        // 6.0.0 work out 'colour' bits into AL and AH
-        mov     ax, si                                      ; AX = colour
-        mov     ah, al                                      ; AH = AL = colour
-        test    al, al
-        jz      BLK                                         ; branching to hard code 'colour' saves a few cycles
-        mov     ax, dx                                      ; proto-mask is white bits to 'colour'
-WHT:    jcxz    J0                                          ; lhs and rhs share same byte?
+        // 6.0.0 work out 'colour' fill word and lhs/rhs 'colour' bits - no branch
+        mov     ax, si                                      ; AL = colour
+        neg     al                                          ; CF = colour != black
+        sbb     ax, ax                                      ; AX = FFFFh 'colour' or 0000h black
+        mov     si, ax                                      ; SI = fill word
+        and     ax, dx                                      ; AL lhs AH rhs 'colour' bits
+        jcxz    J0                                          ; lhs and rhs share same byte?
         dec     cx
         jcxz    J1                                          ; lhs and rhs share same word?
         // 6.1.0 general case
@@ -68,8 +68,8 @@ WHT:    jcxz    J0                                          ; lhs and rhs share 
         inc     di                                          ; next byte
         and     es:[di + bx], dh                            ; mask out target bits  - 16 + EA(8)
         or      es:[di + bx], ah                            ; colour target bits    - 16 + EA(8)
-        // fill 'colour'
-        mov     ax, 0FFFFh                                  ; AX white
+        // 6.1.2 fill 'colour'
+        mov     ax, si                                      ; AX = fill word
         // 6.1.3 handle odd or even line lengths
         shr     cx, 1                                       ; number of words to fill, lsb -> carry flag
         jnc     NC1                                         ; even so no byte to fill
@@ -77,22 +77,6 @@ WHT:    jcxz    J0                                          ; lhs and rhs share 
         jcxz    END
 NC1:    // 6.1.4 remaining word(s) ax 'colour'
         rep     stosw                                       ; CX is checked for !=0 before even the first step
-        jmp     END
-BLK:    jcxz    J0                                          ; lhs and rhs share same byte?
-        dec     cx
-        jcxz    J1                                          ; lhs and rhs share same word?
-        not     dx                                          ; convert proto-mask to mask word
-        add     di, bx                                      ; have ES:DI point to lhs
-        and     es:[di], dl                                 ; mask out black bits
-        mov     bx, cx                                      ; rhs offset = length
-        inc     di                                          ; next byte
-        and     es:[di + bx], dh                            ; mask out black bits
-        mov     ax, 0                                       ; AX black
-        shr     cx, 1                                       ; number of words to fill, lsb -> carry flag
-        jnc     NC0                                         ; even so no byte to fill
-        stosb                                               ; odd do one byte al 'colour'
-        jcxz    END
-NC0:    rep     stosw                                       ; CX is checked for !=0 before even the first step
         jmp     END
 J1:     // 6.2.0 special case same word (saves 48 clock cycles on 8086 line lengths 2 - 15)
         not     dx                                          ; convert proto-mask to mask word
@@ -133,11 +117,10 @@ void cga_hi_vline(uint32_t p, uint16_t len, cga_hi_colour_t c) {
         and     cl, 7                                       ; CL = x mod 8
         mov     dh, 80h
         shr     dh, cl                                      ; DH = pixel bit (leftmost pixel is bit 7)
-        xor     dl, dl                                      ; DL = black bits
-        test    ch, ch
-        jz      VBLK
-        mov     dl, dh                                      ; DL = 'colour' bits
-VBLK:   not     dh                                          ; DH = mask, keeps the other 7 pixels
+        neg     ch                                          ; CF = colour != black
+        sbb     dl, dl                                      ; DL = FFh 'colour' or 00h black
+        and     dl, dh                                      ; DL = 'colour' bits
+        not     dh                                          ; DH = mask, keeps the other 7 pixels
         mov     cx, bx                                      ; CX = len (non-zero, so loop is safe)
         // 3. column byte
         shr     ax, 1                                       ; x / 8
@@ -436,11 +419,10 @@ VL0:    mov     bx, di
         and     cl, 7                                       ; CL = x mod 8
         mov     dh, 80h
         shr     dh, cl                                      ; DH = pixel bit
-        xor     dl, dl                                      ; DL = black bits
-        test    ch, ch
-        jz      VBLK
-        mov     dl, dh                                      ; DL = 'colour' bits
-VBLK:   not     dh                                          ; DH = mask, keeps the other 7 pixels
+        neg     ch                                          ; CF = colour != black
+        sbb     dl, dl                                      ; DL = FFh 'colour' or 00h black
+        and     dl, dh                                      ; DL = 'colour' bits
+        not     dh                                          ; DH = mask, keeps the other 7 pixels
         mov     cx, bx                                      ; CX = len, never 0
         shr     ax, 1                                       ; x / 8
         shr     ax, 1
@@ -488,12 +470,12 @@ HL0:    mov     bx, si
         shr     ax, 1
         mov     cx, ax
         sub     cx, bx                                      ; CX = rhs byte - lhs byte
-        mov     ax, si                                      ; AX = colour
-        mov     ah, al                                      ; AH = AL = colour
-        test    al, al
-        jz      HBLK                                        ; branching to hard code 'colour' saves a few cycles
-        mov     ax, dx                                      ; proto-mask is white bits to 'colour'
-HWHT:   jcxz    HJ0                                         ; lhs and rhs share same byte?
+        mov     ax, si                                      ; AL = colour
+        neg     al                                          ; CF = colour != black
+        sbb     ax, ax                                      ; AX = FFFFh 'colour' or 0000h black
+        mov     si, ax                                      ; SI = fill word
+        and     ax, dx                                      ; AL lhs AH rhs 'colour' bits
+        jcxz    HJ0                                         ; lhs and rhs share same byte?
         dec     cx
         jcxz    HJ1                                         ; lhs and rhs share same word?
         not     dx                                          ; convert proto-mask to mask word
@@ -504,28 +486,12 @@ HWHT:   jcxz    HJ0                                         ; lhs and rhs share 
         inc     di                                          ; next byte
         and     es:[di + bx], dh                            ; mask out target bits
         or      es:[di + bx], ah                            ; colour target bits
-        mov     ax, 0FFFFh                                  ; AX white
+        mov     ax, si                                      ; AX = fill word
         shr     cx, 1                                       ; number of words to fill, lsb -> carry flag
         jnc     HNC1                                        ; even so no byte to fill
         stosb                                               ; odd do one byte
         jcxz    HVDONE
 HNC1:   rep     stosw
-        jmp     HVDONE
-HBLK:   jcxz    HJ0                                         ; lhs and rhs share same byte?
-        dec     cx
-        jcxz    HJ1                                         ; lhs and rhs share same word?
-        not     dx                                          ; convert proto-mask to mask word
-        add     di, bx                                      ; ES:DI point to lhs
-        and     es:[di], dl                                 ; mask out black bits
-        mov     bx, cx                                      ; rhs offset = length
-        inc     di                                          ; next byte
-        and     es:[di + bx], dh                            ; mask out black bits
-        mov     ax, 0                                       ; AX black
-        shr     cx, 1                                       ; number of words to fill, lsb -> carry flag
-        jnc     HNC0                                        ; even so no byte to fill
-        stosb                                               ; odd do one byte
-        jcxz    HVDONE
-HNC0:   rep     stosw
         jmp     HVDONE
 HJ1:    not     dx                                          ; special case same word
         and     es:[di + bx], dx                            ; mask out target word

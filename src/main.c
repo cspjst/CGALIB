@@ -1,13 +1,11 @@
 #include <stdio.h>
 
-//#include "TEST/test_cga.h"
-//#include "TEST/bench_cga.h"
-#include "TEST/bench_line.h"
+#include "TEST/test_cga.h"
+#include "TEST/test_cga_hi.h"
+#include "TEST/test_cga_med.h"
 
 int main() {
     printf("CGALIB!\n");
-    //test_cga();
-    //test_cga_bench();
-    bench_line();
+    test_cga();
     return 0;
 }

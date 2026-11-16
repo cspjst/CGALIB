@@ -2,39 +2,26 @@
  *  @author      Jeremy Simon Thornton
  *  @copyright   2026 Jeremy Simon Thornton
  */
+#include "bench_med_plot.h"
 #include "bench_cga.h"
 
 #include <stdio.h>
-#include <stdint.h>
 
-#include "../include/BIOS/bios_clock_services.h"            /* bios_read_system_clock */
-#include "../include/ENV/env_video_mode.h"         /* env_set_video_mode */
+#include "../include/ENV/env_video_mode.h"
+
 #include "../CGA/cga_types.h"
 #include "../CGA/MED/cga_med_colours.h"
-#include "../CGA/MED/cga_med_plot.h"    /* cga_med_plot, cga_med_plot_calc */
+#include "../CGA/MED/cga_med_plot.h"        /* cga_med_plot, cga_med_plot_calc */
 
-#define BENCH_TICKS    182              /* ~10 s at 18.2065 ticks/s */
-#define BENCH_POINTS   1024             /* power of 2 */
-#define BENCH_SEED     0x1234
-#define TICKS_PER_DAY  0x1800B0UL       /* midnight rollover */
+#define BENCH_TICKS     182                 /* ~10 s per plotter */
+#define BENCH_POINTS    1024                /* power of 2 */
 
-typedef void (*cga_med_plot_fn)(uint32_t p, cga_med_colour_t c);
+typedef void (*bench_med_plot_fn)(uint32_t p, cga_med_colour_t c);
 
 static uint32_t bench_points[BENCH_POINTS];
 static const cga_med_colour_t bench_colours[4] = {
     CGA_MED_BKGD, CGA_MED_COL1, CGA_MED_COL2, CGA_MED_COL3
 };
-
-static uint16_t bench_rand(uint16_t* s) {
-    *s = (uint16_t)(*s * 25173u + 13849u);
-    return *s;
-}
-
-static uint32_t bench_ticks() {
-    bios_ticks_since_midnight_t t;
-    bios_read_system_clock(&t);
-    return (uint32_t)t;
-}
 
 /* same call shape as a real plotter: measures loop + call overhead */
 static void bench_null(uint32_t p, cga_med_colour_t c) {
@@ -43,7 +30,7 @@ static void bench_null(uint32_t p, cga_med_colour_t c) {
 }
 
 /* plots for BENCH_TICKS, returns plot count, actual ticks in *ticks */
-static unsigned long bench_run(cga_med_plot_fn plot, unsigned long* ticks) {
+static unsigned long bench_run(bench_med_plot_fn plot, unsigned long* ticks) {
     unsigned long n = 0;
     uint32_t start, now;
     unsigned i;
@@ -57,9 +44,8 @@ static unsigned long bench_run(cga_med_plot_fn plot, unsigned long* ticks) {
             plot(bench_points[i], bench_colours[i & 3]);
         n += BENCH_POINTS;
         now = bench_ticks();
-        if (now < start) now += TICKS_PER_DAY;
-    } while (now - start < BENCH_TICKS);
-    *ticks = now - start;
+    } while (bench_elapsed(start, now) < BENCH_TICKS);
+    *ticks = bench_elapsed(start, now);
     return n;
 }
 
@@ -75,7 +61,7 @@ static void bench_print(const char* name, unsigned long n, unsigned long t,
     printf("\n");
 }
 
-void test_cga_bench() {
+void bench_med_plot() {
     bios_video_mode_t original;
     cga_point_t p;
     uint16_t s = BENCH_SEED;
@@ -85,12 +71,12 @@ void test_cga_bench() {
     unsigned i;
 
     for (i = 0; i < BENCH_POINTS; ++i) {
-        p.x = bench_rand(&s) % 320;
-        p.y = bench_rand(&s) % 200;
+        p.x = (bench_rand(&s) >> 4) % 320;
+        p.y = (bench_rand(&s) >> 4) % 200;
         bench_points[i] = p.u;
     }
 
-    printf("Benchmark: null, table, calc - ~10 s each in mode 04h...\n");
+    printf("Medium plot benchmark: null, table, calc - ~10 s each in mode 04h...\n");
     original = env_set_video_mode(BIOS_CGA_GRAPHICS_4_COLOUR_320X200);
 
     n_null  = bench_run(bench_null,        &t_null);

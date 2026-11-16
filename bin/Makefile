@@ -132,6 +132,30 @@ TEST/fast: .SYMBOLIC
 TEST/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/build
 
+CGA/HI/cga_hi_cls.obj: .SYMBOLIC
+CGA/HI/cga_hi_cls.obj: CGA/HI/cga_hi_cls.c.obj
+
+# target to build an object file
+CGA/HI/cga_hi_cls.c.obj: .SYMBOLIC
+CGA/HI/cga_hi_cls.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_cls.c.obj
+
+CGA/HI/cga_hi_cls.i: .SYMBOLIC
+CGA/HI/cga_hi_cls.i: CGA/HI/cga_hi_cls.c.i
+
+# target to preprocess a source file
+CGA/HI/cga_hi_cls.c.i: .SYMBOLIC
+CGA/HI/cga_hi_cls.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_cls.c.i
+
+CGA/HI/cga_hi_cls.s: .SYMBOLIC
+CGA/HI/cga_hi_cls.s: CGA/HI/cga_hi_cls.c.s
+
+# target to generate assembly for a file
+CGA/HI/cga_hi_cls.c.s: .SYMBOLIC
+CGA/HI/cga_hi_cls.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_cls.c.s
+
 CGA/HI/cga_hi_line.obj: .SYMBOLIC
 CGA/HI/cga_hi_line.obj: CGA/HI/cga_hi_line.c.obj
 
@@ -179,30 +203,6 @@ CGA/HI/cga_hi_plot.s: CGA/HI/cga_hi_plot.c.s
 CGA/HI/cga_hi_plot.c.s: .SYMBOLIC
 CGA/HI/cga_hi_plot.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_plot.c.s
-
-CGA/HI/cga_hi_vram.obj: .SYMBOLIC
-CGA/HI/cga_hi_vram.obj: CGA/HI/cga_hi_vram.c.obj
-
-# target to build an object file
-CGA/HI/cga_hi_vram.c.obj: .SYMBOLIC
-CGA/HI/cga_hi_vram.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_vram.c.obj
-
-CGA/HI/cga_hi_vram.i: .SYMBOLIC
-CGA/HI/cga_hi_vram.i: CGA/HI/cga_hi_vram.c.i
-
-# target to preprocess a source file
-CGA/HI/cga_hi_vram.c.i: .SYMBOLIC
-CGA/HI/cga_hi_vram.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_vram.c.i
-
-CGA/HI/cga_hi_vram.s: .SYMBOLIC
-CGA/HI/cga_hi_vram.s: CGA/HI/cga_hi_vram.c.s
-
-# target to generate assembly for a file
-CGA/HI/cga_hi_vram.c.s: .SYMBOLIC
-CGA/HI/cga_hi_vram.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_vram.c.s
 
 CGA/MED/cga_med_plot.obj: .SYMBOLIC
 CGA/MED/cga_med_plot.obj: CGA/MED/cga_med_plot.c.obj
@@ -282,53 +282,32 @@ CGA/cga_version.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_version.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_version.c.s
 
-TEST/bench_cga.obj: .SYMBOLIC
-TEST/bench_cga.obj: TEST/bench_cga.c.obj
+CGA/cga_vram.obj: .SYMBOLIC
+CGA/cga_vram.obj: CGA/cga_vram.c.obj
 
 # target to build an object file
-TEST/bench_cga.c.obj: .SYMBOLIC
-TEST/bench_cga.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_cga.c.obj
+CGA/cga_vram.c.obj: .SYMBOLIC
+CGA/cga_vram.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_vram.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_vram.c.obj
 
-TEST/bench_cga.i: .SYMBOLIC
-TEST/bench_cga.i: TEST/bench_cga.c.i
-
-# target to preprocess a source file
-TEST/bench_cga.c.i: .SYMBOLIC
-TEST/bench_cga.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_cga.c.i
-
-TEST/bench_cga.s: .SYMBOLIC
-TEST/bench_cga.s: TEST/bench_cga.c.s
-
-# target to generate assembly for a file
-TEST/bench_cga.c.s: .SYMBOLIC
-TEST/bench_cga.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_cga.c.s
-
-TEST/bench_line.obj: .SYMBOLIC
-TEST/bench_line.obj: TEST/bench_line.c.obj
-
-# target to build an object file
-TEST/bench_line.c.obj: .SYMBOLIC
-TEST/bench_line.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_line.c.obj
-
-TEST/bench_line.i: .SYMBOLIC
-TEST/bench_line.i: TEST/bench_line.c.i
+CGA/cga_vram.i: .SYMBOLIC
+CGA/cga_vram.i: CGA/cga_vram.c.i
 
 # target to preprocess a source file
-TEST/bench_line.c.i: .SYMBOLIC
-TEST/bench_line.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_line.c.i
+CGA/cga_vram.c.i: .SYMBOLIC
+CGA/cga_vram.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_vram.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_vram.c.i
 
-TEST/bench_line.s: .SYMBOLIC
-TEST/bench_line.s: TEST/bench_line.c.s
+CGA/cga_vram.s: .SYMBOLIC
+CGA/cga_vram.s: CGA/cga_vram.c.s
 
 # target to generate assembly for a file
-TEST/bench_line.c.s: .SYMBOLIC
-TEST/bench_line.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/bench_line.c.s
+CGA/cga_vram.c.s: .SYMBOLIC
+CGA/cga_vram.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGALIB.dir/build.make -h CMakeFiles/CGALIB.dir/CGA/cga_vram.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/cga_vram.c.s
 
 TEST/test_cga.obj: .SYMBOLIC
 TEST/test_cga.obj: TEST/test_cga.c.obj
@@ -353,6 +332,54 @@ TEST/test_cga.s: TEST/test_cga.c.s
 TEST/test_cga.c.s: .SYMBOLIC
 TEST/test_cga.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga.c.s
+
+TEST/test_cga_hi.obj: .SYMBOLIC
+TEST/test_cga_hi.obj: TEST/test_cga_hi.c.obj
+
+# target to build an object file
+TEST/test_cga_hi.c.obj: .SYMBOLIC
+TEST/test_cga_hi.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga_hi.c.obj
+
+TEST/test_cga_hi.i: .SYMBOLIC
+TEST/test_cga_hi.i: TEST/test_cga_hi.c.i
+
+# target to preprocess a source file
+TEST/test_cga_hi.c.i: .SYMBOLIC
+TEST/test_cga_hi.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga_hi.c.i
+
+TEST/test_cga_hi.s: .SYMBOLIC
+TEST/test_cga_hi.s: TEST/test_cga_hi.c.s
+
+# target to generate assembly for a file
+TEST/test_cga_hi.c.s: .SYMBOLIC
+TEST/test_cga_hi.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga_hi.c.s
+
+TEST/test_cga_med.obj: .SYMBOLIC
+TEST/test_cga_med.obj: TEST/test_cga_med.c.obj
+
+# target to build an object file
+TEST/test_cga_med.c.obj: .SYMBOLIC
+TEST/test_cga_med.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga_med.c.obj
+
+TEST/test_cga_med.i: .SYMBOLIC
+TEST/test_cga_med.i: TEST/test_cga_med.c.i
+
+# target to preprocess a source file
+TEST/test_cga_med.c.i: .SYMBOLIC
+TEST/test_cga_med.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga_med.c.i
+
+TEST/test_cga_med.s: .SYMBOLIC
+TEST/test_cga_med.s: TEST/test_cga_med.c.s
+
+# target to generate assembly for a file
+TEST/test_cga_med.c.s: .SYMBOLIC
+TEST/test_cga_med.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga_med.c.s
 
 main.obj: .SYMBOLIC
 main.obj: main.c.obj
@@ -389,15 +416,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... CGALIB"
 	@echo "... TEST"
+	@echo "... CGA/HI/cga_hi_cls.obj"
+	@echo "... CGA/HI/cga_hi_cls.i"
+	@echo "... CGA/HI/cga_hi_cls.s"
 	@echo "... CGA/HI/cga_hi_line.obj"
 	@echo "... CGA/HI/cga_hi_line.i"
 	@echo "... CGA/HI/cga_hi_line.s"
 	@echo "... CGA/HI/cga_hi_plot.obj"
 	@echo "... CGA/HI/cga_hi_plot.i"
 	@echo "... CGA/HI/cga_hi_plot.s"
-	@echo "... CGA/HI/cga_hi_vram.obj"
-	@echo "... CGA/HI/cga_hi_vram.i"
-	@echo "... CGA/HI/cga_hi_vram.s"
 	@echo "... CGA/MED/cga_med_plot.obj"
 	@echo "... CGA/MED/cga_med_plot.i"
 	@echo "... CGA/MED/cga_med_plot.s"
@@ -407,15 +434,18 @@ help:
 	@echo "... CGA/cga_version.obj"
 	@echo "... CGA/cga_version.i"
 	@echo "... CGA/cga_version.s"
-	@echo "... TEST/bench_cga.obj"
-	@echo "... TEST/bench_cga.i"
-	@echo "... TEST/bench_cga.s"
-	@echo "... TEST/bench_line.obj"
-	@echo "... TEST/bench_line.i"
-	@echo "... TEST/bench_line.s"
+	@echo "... CGA/cga_vram.obj"
+	@echo "... CGA/cga_vram.i"
+	@echo "... CGA/cga_vram.s"
 	@echo "... TEST/test_cga.obj"
 	@echo "... TEST/test_cga.i"
 	@echo "... TEST/test_cga.s"
+	@echo "... TEST/test_cga_hi.obj"
+	@echo "... TEST/test_cga_hi.i"
+	@echo "... TEST/test_cga_hi.s"
+	@echo "... TEST/test_cga_med.obj"
+	@echo "... TEST/test_cga_med.i"
+	@echo "... TEST/test_cga_med.s"
 	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"
