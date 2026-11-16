@@ -228,6 +228,30 @@ CGA/MED/cga_med_cls.c.s: .SYMBOLIC
 CGA/MED/cga_med_cls.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/MED/cga_med_cls.c.s
 
+CGA/MED/cga_med_line.obj: .SYMBOLIC
+CGA/MED/cga_med_line.obj: CGA/MED/cga_med_line.c.obj
+
+# target to build an object file
+CGA/MED/cga_med_line.c.obj: .SYMBOLIC
+CGA/MED/cga_med_line.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/MED/cga_med_line.c.obj
+
+CGA/MED/cga_med_line.i: .SYMBOLIC
+CGA/MED/cga_med_line.i: CGA/MED/cga_med_line.c.i
+
+# target to preprocess a source file
+CGA/MED/cga_med_line.c.i: .SYMBOLIC
+CGA/MED/cga_med_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/MED/cga_med_line.c.i
+
+CGA/MED/cga_med_line.s: .SYMBOLIC
+CGA/MED/cga_med_line.s: CGA/MED/cga_med_line.c.s
+
+# target to generate assembly for a file
+CGA/MED/cga_med_line.c.s: .SYMBOLIC
+CGA/MED/cga_med_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/MED/cga_med_line.c.s
+
 CGA/MED/cga_med_plot.obj: .SYMBOLIC
 CGA/MED/cga_med_plot.obj: CGA/MED/cga_med_plot.c.obj
 
@@ -452,6 +476,9 @@ help:
 	@echo "... CGA/MED/cga_med_cls.obj"
 	@echo "... CGA/MED/cga_med_cls.i"
 	@echo "... CGA/MED/cga_med_cls.s"
+	@echo "... CGA/MED/cga_med_line.obj"
+	@echo "... CGA/MED/cga_med_line.i"
+	@echo "... CGA/MED/cga_med_line.s"
 	@echo "... CGA/MED/cga_med_plot.obj"
 	@echo "... CGA/MED/cga_med_plot.i"
 	@echo "... CGA/MED/cga_med_plot.s"

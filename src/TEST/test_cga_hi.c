@@ -329,8 +329,8 @@ static void test_cga_hi_bresenham_dump() {
 
 void test_cga_hi() {
     //test_cga_hi_plot_dump();
-    test_cga_hi_cls();
-    //test_cga_hi_hline_dump();
+    //test_cga_hi_cls();
+    test_cga_hi_hline_dump();
     //test_cga_hi_vline_dump();
     //test_cga_hi_bresenham_dump();
 }

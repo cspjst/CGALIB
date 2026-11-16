@@ -1,3 +1,7 @@
+/**
+ *  @author      Jeremy Simon Thornton
+ *  @copyright   2026 Jeremy Simon Thornton
+ */
 #ifndef CGA_MED_COLOURS_H
 #define CGA_MED_COLOURS_H
 
