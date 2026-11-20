@@ -252,6 +252,30 @@ BENCH/bench_med_plot.c.s: .SYMBOLIC
 BENCH/bench_med_plot.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_med_plot.c.s
 
+CGA/HI/cga_hi_bmp.obj: .SYMBOLIC
+CGA/HI/cga_hi_bmp.obj: CGA/HI/cga_hi_bmp.c.obj
+
+# target to build an object file
+CGA/HI/cga_hi_bmp.c.obj: .SYMBOLIC
+CGA/HI/cga_hi_bmp.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_bmp.c.obj
+
+CGA/HI/cga_hi_bmp.i: .SYMBOLIC
+CGA/HI/cga_hi_bmp.i: CGA/HI/cga_hi_bmp.c.i
+
+# target to preprocess a source file
+CGA/HI/cga_hi_bmp.c.i: .SYMBOLIC
+CGA/HI/cga_hi_bmp.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_bmp.c.i
+
+CGA/HI/cga_hi_bmp.s: .SYMBOLIC
+CGA/HI/cga_hi_bmp.s: CGA/HI/cga_hi_bmp.c.s
+
+# target to generate assembly for a file
+CGA/HI/cga_hi_bmp.c.s: .SYMBOLIC
+CGA/HI/cga_hi_bmp.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_bmp.c.s
+
 CGA/HI/cga_hi_cls.obj: .SYMBOLIC
 CGA/HI/cga_hi_cls.obj: CGA/HI/cga_hi_cls.c.obj
 
@@ -599,6 +623,9 @@ help:
 	@echo "... BENCH/bench_med_plot.obj"
 	@echo "... BENCH/bench_med_plot.i"
 	@echo "... BENCH/bench_med_plot.s"
+	@echo "... CGA/HI/cga_hi_bmp.obj"
+	@echo "... CGA/HI/cga_hi_bmp.i"
+	@echo "... CGA/HI/cga_hi_bmp.s"
 	@echo "... CGA/HI/cga_hi_cls.obj"
 	@echo "... CGA/HI/cga_hi_cls.i"
 	@echo "... CGA/HI/cga_hi_cls.s"

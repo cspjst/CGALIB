@@ -17,7 +17,7 @@
 
 #include "../CGA/cga_vram.h"
 
-volatile unsigned char far* const test_vram = (volatile unsigned char far*)0xB8000000L;
+volatile unsigned char* const test_vram = (volatile unsigned char*)0xB8000000L;
 
 /* ---------------------------------------------------------------- helpers */
 
@@ -162,6 +162,6 @@ void test_cga() {
     printf("Test CGALIB...\n");
     //test_cga_versions();
     //test_cga_vram();
-    test_cga_med();
-    //test_cga_hi();
+    //test_cga_med();
+    test_cga_hi();
 }

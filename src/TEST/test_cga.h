@@ -21,7 +21,7 @@
 #define TEST_BANK_BYTES     0x1F40      /* visible bytes per bank */
 #define TEST_ODD_BANK       0x2000
 
-extern volatile unsigned char far* const test_vram;
+extern volatile unsigned char* const test_vram;
 
 void     test_wait_key(const char* msg);
 uint16_t test_rand(uint16_t* s);
