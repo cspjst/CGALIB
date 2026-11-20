@@ -39,11 +39,20 @@ void cga_hi_bmp_top( const cga_hi_bmp_t* bmp) {
 
 uint32_t cga_hi_bmp_save(const char* file_path, const cga_hi_bmp_t* bmp) {
     errno = EINVAL;
-    if(!bmp) { perror(__FUNCTION__);  return 0; }
+    if(!bmp) goto error;
     FILE* f = fopen(file_path, "wb");
-    if(!f) { perror(__FUNCTION__); return 0; };
+    if(!f) goto error;
     uint32_t size = sizeof(cga_hi_bmp_t);
-    if(!fwrite(bmp, size, 1, f)) { perror(__FUNCTION__); return 0; };
-
+    if(!fwrite(bmp, size, 1, f)) goto error;
+    for(int i = 0; i < bmp->nblocks; ++i) {
+        if(bmp->data[i] && !fwrite(bmp->data[i], bmp->size, 1, f)) goto corrupt;
+        if(bmp->data[i]) size += bmp->size;
+    }
+    if(fclose(f) == EOF) { perror(__FUNCTION__);  return 0; }
     return size;
+corrupt:
+    remove(file_path);
+error:
+    perror(__FUNCTION__);
+    return 0;
 }

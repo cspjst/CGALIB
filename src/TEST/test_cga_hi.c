@@ -332,7 +332,7 @@ void test_bmp() {
     cga_hi_bmp_init(bmp, 32, 8, 256, 1);
     cga_hi_bmp_top(bmp);
     printf("%li bytes out\n", cga_hi_bmp_save("test1.cga", bmp));
-    printf("%li bytes in\n", cga_hi_bmp_load("test2.cga", bmp));
+    //printf("%li bytes in\n", cga_hi_bmp_load("test2.cga", bmp));
 }
 
 void test_cga_hi() {
