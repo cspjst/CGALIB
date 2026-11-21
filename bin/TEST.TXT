@@ -1,0 +1,23 @@
+CGALIB!
+Testing cga_hi_bmp save / load...
+  save 1 block: size returned        PASS
+  load 1 block: size returned        PASS
+  load 1 block: identical            PASS
+  save several blocks: size          PASS
+  load several blocks: size          PASS
+  load several blocks: identical     PASS
+  (library error messages below are expected)
+  save NULL bmp                      PASS
+  load NULL bmp                      PASS
+  save NULL block refused            PASS
+  save NULL block: file removed      PASS
+  save nblocks 0 refused             PASS
+  save nblocks > capacity refused    PASS
+  bad nblocks: no file               PASS
+  load nblocks > capacity refused    PASS
+  load missing file                  PASS
+  load truncated header              PASS
+  load truncated data                PASS
+  truncated data: block released     PASS
+cga_hi_bmp save / load: 0 failed
+

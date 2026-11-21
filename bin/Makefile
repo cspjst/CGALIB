@@ -525,6 +525,30 @@ TEST/test_cga.c.s: .SYMBOLIC
 TEST/test_cga.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga.c.s
 
+TEST/test_cga_bmp.obj: .SYMBOLIC
+TEST/test_cga_bmp.obj: TEST/test_cga_bmp.c.obj
+
+# target to build an object file
+TEST/test_cga_bmp.c.obj: .SYMBOLIC
+TEST/test_cga_bmp.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga_bmp.c.obj
+
+TEST/test_cga_bmp.i: .SYMBOLIC
+TEST/test_cga_bmp.i: TEST/test_cga_bmp.c.i
+
+# target to preprocess a source file
+TEST/test_cga_bmp.c.i: .SYMBOLIC
+TEST/test_cga_bmp.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga_bmp.c.i
+
+TEST/test_cga_bmp.s: .SYMBOLIC
+TEST/test_cga_bmp.s: TEST/test_cga_bmp.c.s
+
+# target to generate assembly for a file
+TEST/test_cga_bmp.c.s: .SYMBOLIC
+TEST/test_cga_bmp.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/TEST/test_cga_bmp.c.s
+
 TEST/test_cga_hi.obj: .SYMBOLIC
 TEST/test_cga_hi.obj: TEST/test_cga_hi.c.obj
 
@@ -656,6 +680,9 @@ help:
 	@echo "... TEST/test_cga.obj"
 	@echo "... TEST/test_cga.i"
 	@echo "... TEST/test_cga.s"
+	@echo "... TEST/test_cga_bmp.obj"
+	@echo "... TEST/test_cga_bmp.i"
+	@echo "... TEST/test_cga_bmp.s"
 	@echo "... TEST/test_cga_hi.obj"
 	@echo "... TEST/test_cga_hi.i"
 	@echo "... TEST/test_cga_hi.s"

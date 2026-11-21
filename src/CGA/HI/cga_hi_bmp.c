@@ -19,6 +19,18 @@ void cga_hi_bmp_init(cga_hi_bmp_t* bmp, uint16_t w, uint16_t h, uint16_t sz, uin
     }
 }
 
+void cga_hi_bmp_free_data(cga_hi_bmp_t* bmp, int i) {
+    for(; i >= 0; --i) {
+        free(bmp->data[i]);
+        bmp->data[i] = NULL;
+    }
+}
+
+void cga_hi_bmp_free(cga_hi_bmp_t* bmp) {
+    cga_hi_bmp_free_data(bmp, bmp->nblocks);
+    free(bmp);
+}
+
 cga_hi_bmp_t* cga_hi_bmp_new(uint16_t w, uint16_t h, uint16_t sz, uint16_t n) {
     cga_hi_bmp_t* bmp = malloc(sizeof(*bmp));
     cga_hi_bmp_init(bmp, w, h, sz, n);
@@ -38,21 +50,56 @@ void cga_hi_bmp_top( const cga_hi_bmp_t* bmp) {
 }
 
 uint32_t cga_hi_bmp_save(const char* file_path, const cga_hi_bmp_t* bmp) {
+    uint16_t i;
     errno = EINVAL;
     if(!bmp) goto error;
+    if(bmp->nblocks == 0 || bmp->nblocks > sizeof bmp->data / sizeof bmp->data[0]) goto error;
     FILE* f = fopen(file_path, "wb");
     if(!f) goto error;
     uint32_t size = sizeof(cga_hi_bmp_t);
-    if(!fwrite(bmp, size, 1, f)) goto error;
-    for(int i = 0; i < bmp->nblocks; ++i) {
-        if(bmp->data[i] && !fwrite(bmp->data[i], bmp->size, 1, f)) goto corrupt;
-        if(bmp->data[i]) size += bmp->size;
+    if(!fwrite(bmp, size, 1, f)) goto corrupt;
+
+    for(i = 0; i < bmp->nblocks; ++i) {
+        if(!bmp->data[i] || !fwrite(bmp->data[i], bmp->size, 1, f)) goto corrupt;
+        size += bmp->size;
     }
-    if(fclose(f) == EOF) { perror(__FUNCTION__);  return 0; }
+
+    if(fclose(f) == EOF) goto discard;
     return size;
 corrupt:
+    fprintf(stderr, "write failed, %s removed\n", file_path);
+    fclose(f);
+discard:
     remove(file_path);
 error:
     perror(__FUNCTION__);
     return 0;
 }
+
+uint32_t cga_hi_bmp_load(const char* file_path, cga_hi_bmp_t* bmp) {
+    int i = 0;
+    errno = EINVAL;
+    if(!bmp) goto error;
+    FILE* f = fopen(file_path, "rb");
+    if(!f) goto error;
+    uint32_t size = sizeof(cga_hi_bmp_t);
+    if(!fread(bmp, size, 1, f)) goto close;
+    if(bmp->nblocks > sizeof bmp->data / sizeof bmp->data[0]) goto close;
+
+    for(; i < bmp->nblocks; ++i) {
+        bmp->data[i] = malloc(bmp->size);
+        if(!bmp->data[i] || !fread(bmp->data[i], bmp->size, 1, f)) goto release;
+        size += bmp->size;
+    }
+
+     if(fclose(f) == EOF) goto error;
+     return size;
+ release:
+    cga_hi_bmp_free_data(bmp, i);
+ close:
+    if(feof(f)) fprintf(stderr, "file %s is shorter than expected\n", file_path);
+    fclose(f);
+ error:
+    perror(__FUNCTION__);
+    return 0;
+ }

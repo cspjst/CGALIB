@@ -15,6 +15,10 @@ void cga_hi_bmp_init(cga_hi_bmp_t* bmp, uint16_t w, uint16_t h, uint16_t sz, uin
 
 cga_hi_bmp_t* cga_hi_bmp_new(uint16_t w, uint16_t h, uint16_t sz, uint16_t n);
 
+void cga_hi_bmp_free_data(cga_hi_bmp_t* bmp, int i);
+
+void cga_hi_bmp_free(cga_hi_bmp_t* bmp);
+
 void cga_hi_bmp_top(const cga_hi_bmp_t* bmp);
 
 uint32_t cga_hi_bmp_save(const char* file_path, const cga_hi_bmp_t* bmp);
