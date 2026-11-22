@@ -53,7 +53,7 @@ void cga_hi_bmp_top( const cga_hi_bmp_t* bmp) {
     }
 }
 
-uint32_t cga_hi_bmp_save(const char* file_path, const cga_hi_bmp_t* bmp) {
+uint32_t cga_hi_bmp_save_raw(const char* file_path, const cga_hi_bmp_t* bmp) {
     uint16_t i;
     errno = EINVAL;
     if(!bmp) goto error;
@@ -80,7 +80,7 @@ error:
     return 0;
 }
 
-uint32_t cga_hi_bmp_load(const char* file_path, cga_hi_bmp_t* bmp) {
+uint32_t cga_hi_bmp_load_raw(const char* file_path, cga_hi_bmp_t* bmp) {
     int i = 0;
     errno = EINVAL;
     if(!bmp) goto error;

@@ -84,9 +84,9 @@ static void test_cga_hi_bmp() {
     cga_hi_bmp_init(out, 32, 8, 256, 1);
     assert(test_hi_bmp_fill(out));
     expect = sizeof(cga_hi_bmp_t) + (uint32_t)out->nblocks * out->size;
-    got = cga_hi_bmp_save(BMP_FILE, out);
+    got = cga_hi_bmp_save_raw(BMP_FILE, out);
     test_bmp_report("save 1 block: size returned", got == expect, &failed);
-    got = cga_hi_bmp_load(BMP_FILE, in);
+    got = cga_hi_bmp_load_raw(BMP_FILE, in);
     test_bmp_report("load 1 block: size returned", got == expect, &failed);
     test_bmp_report("load 1 block: identical", got && test_hi_bmp_diff(out, in) == 0, &failed);
     if(got) cga_hi_bmp_free_data(in, in->nblocks - 1);
@@ -96,9 +96,9 @@ static void test_cga_hi_bmp() {
     cga_hi_bmp_init(out, 32, 8, 256, n);
     assert(test_hi_bmp_fill(out));
     expect = sizeof(cga_hi_bmp_t) + (uint32_t)out->nblocks * out->size;
-    got = cga_hi_bmp_save(BMP_FILE, out);
+    got = cga_hi_bmp_save_raw(BMP_FILE, out);
     test_bmp_report("save several blocks: size", got == expect, &failed);
-    got = cga_hi_bmp_load(BMP_FILE, in);
+    got = cga_hi_bmp_load_raw(BMP_FILE, in);
     test_bmp_report("load several blocks: size", got == expect, &failed);
     test_bmp_report("load several blocks: identical", got && test_hi_bmp_diff(out, in) == 0, &failed);
     if(got) cga_hi_bmp_free_data(in, in->nblocks - 1);
@@ -106,40 +106,40 @@ static void test_cga_hi_bmp() {
     printf("  (library error messages below are expected)\n");
 
     /* 3. NULL bitmap */
-    test_bmp_report("save NULL bmp", cga_hi_bmp_save(BMP_BAD, NULL) == 0, &failed);
-    test_bmp_report("load NULL bmp", cga_hi_bmp_load(BMP_FILE, NULL) == 0, &failed);
+    test_bmp_report("save NULL bmp", cga_hi_bmp_save_raw(BMP_BAD, NULL) == 0, &failed);
+    test_bmp_report("load NULL bmp", cga_hi_bmp_load_raw(BMP_FILE, NULL) == 0, &failed);
 
     /* 4. NULL block: refused, and no file left behind */
     free(out->data[0]);
     out->data[0] = NULL;
-    test_bmp_report("save NULL block refused", cga_hi_bmp_save(BMP_BAD, out) == 0, &failed);
+    test_bmp_report("save NULL block refused", cga_hi_bmp_save_raw(BMP_BAD, out) == 0, &failed);
     test_bmp_report("save NULL block: file removed", !test_file_exists(BMP_BAD), &failed);
     assert(test_hi_bmp_fill(out));
 
     /* 5. bad nblocks on save: refused before anything is written */
     saved = out->nblocks;
     out->nblocks = 0;
-    test_bmp_report("save nblocks 0 refused", cga_hi_bmp_save(BMP_BAD, out) == 0, &failed);
+    test_bmp_report("save nblocks 0 refused", cga_hi_bmp_save_raw(BMP_BAD, out) == 0, &failed);
     out->nblocks = cap + 1;
-    test_bmp_report("save nblocks > capacity refused", cga_hi_bmp_save(BMP_BAD, out) == 0, &failed);
+    test_bmp_report("save nblocks > capacity refused", cga_hi_bmp_save_raw(BMP_BAD, out) == 0, &failed);
     test_bmp_report("bad nblocks: no file", !test_file_exists(BMP_BAD), &failed);
 
     /* 6. load a header claiming too many blocks */
     test_hi_bmp_write_partial(BMP_BAD, out, sizeof(cga_hi_bmp_t), 0);
     out->nblocks = saved;
-    test_bmp_report("load nblocks > capacity refused", cga_hi_bmp_load(BMP_BAD, in) == 0, &failed);
+    test_bmp_report("load nblocks > capacity refused", cga_hi_bmp_load_raw(BMP_BAD, in) == 0, &failed);
 
     /* 7. missing file */
     remove(BMP_BAD);
-    test_bmp_report("load missing file", cga_hi_bmp_load(BMP_BAD, in) == 0, &failed);
+    test_bmp_report("load missing file", cga_hi_bmp_load_raw(BMP_BAD, in) == 0, &failed);
 
     /* 8. truncated header */
     test_hi_bmp_write_partial(BMP_BAD, out, 3, 0);
-    test_bmp_report("load truncated header", cga_hi_bmp_load(BMP_BAD, in) == 0, &failed);
+    test_bmp_report("load truncated header", cga_hi_bmp_load_raw(BMP_BAD, in) == 0, &failed);
 
     /* 9. truncated data: the partly read block is released */
     test_hi_bmp_write_partial(BMP_BAD, out, sizeof(cga_hi_bmp_t), out->size / 2);
-    test_bmp_report("load truncated data", cga_hi_bmp_load(BMP_BAD, in) == 0, &failed);
+    test_bmp_report("load truncated data", cga_hi_bmp_load_raw(BMP_BAD, in) == 0, &failed);
     test_bmp_report("truncated data: block released", in->data[0] == NULL, &failed);
 
     cga_hi_bmp_free_data(out, out->nblocks - 1);
