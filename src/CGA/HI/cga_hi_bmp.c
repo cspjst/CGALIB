@@ -37,6 +37,10 @@ cga_hi_bmp_t* cga_hi_bmp_new(uint16_t w, uint16_t h, uint16_t sz, uint16_t n) {
     return bmp;
 }
 
+void cga_hi_bmp_shift_right(char* src, char* dst, uint16_t w, uint16_t h) {
+    // rcr
+}
+
 void cga_hi_bmp_top( const cga_hi_bmp_t* bmp) {
     errno = EINVAL;
     if(!bmp) { perror(__FUNCTION__);  return; }
