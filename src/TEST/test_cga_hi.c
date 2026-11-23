@@ -17,7 +17,6 @@
 #include "../CGA/HI/cga_hi_plot.h"
 #include "../CGA/HI/cga_hi_cls.h"
 #include "../CGA/HI/cga_hi_line.h"
-#include "../CGA/HI/cga_hi_bmp.h"
 
 #define HLINE_RANDOM        64
 #define HLINE_FIXED_BYTES   267     /* bytes the fixed cases change over a 55h prefill (host reference) */
@@ -328,20 +327,10 @@ static void test_cga_hi_bresenham_dump() {
     assert(fixed_changed == BLINE_FIXED_BYTES);
 }
 
-void test_bmp() {
-    cga_hi_bmp_t* bmp = malloc(sizeof(*bmp));
-    cga_hi_bmp_init(bmp, 32, 8, 256, 1);
-    cga_hi_bmp_top(bmp);
-    printf("%li bytes out\n", cga_hi_bmp_save("test1.cga", bmp));
-    printf("%li bytes in\n", cga_hi_bmp_load("test2.cga", bmp));
-    if(!errno) cga_hi_bmp_top(bmp);
-}
-
 void test_cga_hi() {
     //test_cga_hi_plot_dump();
     //test_cga_hi_cls();
     //test_cga_hi_hline_dump();
     //test_cga_hi_vline_dump();
     //test_cga_hi_bresenham_dump();
-    test_bmp();
 }

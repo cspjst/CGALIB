@@ -252,6 +252,30 @@ BENCH/bench_med_plot.c.s: .SYMBOLIC
 BENCH/bench_med_plot.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/BENCH/bench_med_plot.c.s
 
+CGA/HI/cga_hi_blit.obj: .SYMBOLIC
+CGA/HI/cga_hi_blit.obj: CGA/HI/cga_hi_blit.c.obj
+
+# target to build an object file
+CGA/HI/cga_hi_blit.c.obj: .SYMBOLIC
+CGA/HI/cga_hi_blit.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_blit.c.obj
+
+CGA/HI/cga_hi_blit.i: .SYMBOLIC
+CGA/HI/cga_hi_blit.i: CGA/HI/cga_hi_blit.c.i
+
+# target to preprocess a source file
+CGA/HI/cga_hi_blit.c.i: .SYMBOLIC
+CGA/HI/cga_hi_blit.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_blit.c.i
+
+CGA/HI/cga_hi_blit.s: .SYMBOLIC
+CGA/HI/cga_hi_blit.s: CGA/HI/cga_hi_blit.c.s
+
+# target to generate assembly for a file
+CGA/HI/cga_hi_blit.c.s: .SYMBOLIC
+CGA/HI/cga_hi_blit.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_blit.c.s
+
 CGA/HI/cga_hi_bmp.obj: .SYMBOLIC
 CGA/HI/cga_hi_bmp.obj: CGA/HI/cga_hi_bmp.c.obj
 
@@ -275,6 +299,30 @@ CGA/HI/cga_hi_bmp.s: CGA/HI/cga_hi_bmp.c.s
 CGA/HI/cga_hi_bmp.c.s: .SYMBOLIC
 CGA/HI/cga_hi_bmp.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_bmp.c.s
+
+CGA/HI/cga_hi_bmp_pbm.obj: .SYMBOLIC
+CGA/HI/cga_hi_bmp_pbm.obj: CGA/HI/cga_hi_bmp_pbm.c.obj
+
+# target to build an object file
+CGA/HI/cga_hi_bmp_pbm.c.obj: .SYMBOLIC
+CGA/HI/cga_hi_bmp_pbm.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_bmp_pbm.c.obj
+
+CGA/HI/cga_hi_bmp_pbm.i: .SYMBOLIC
+CGA/HI/cga_hi_bmp_pbm.i: CGA/HI/cga_hi_bmp_pbm.c.i
+
+# target to preprocess a source file
+CGA/HI/cga_hi_bmp_pbm.c.i: .SYMBOLIC
+CGA/HI/cga_hi_bmp_pbm.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_bmp_pbm.c.i
+
+CGA/HI/cga_hi_bmp_pbm.s: .SYMBOLIC
+CGA/HI/cga_hi_bmp_pbm.s: CGA/HI/cga_hi_bmp_pbm.c.s
+
+# target to generate assembly for a file
+CGA/HI/cga_hi_bmp_pbm.c.s: .SYMBOLIC
+CGA/HI/cga_hi_bmp_pbm.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make -h CMakeFiles/TEST.dir/CGA/HI/cga_hi_bmp_pbm.c.s
 
 CGA/HI/cga_hi_cls.obj: .SYMBOLIC
 CGA/HI/cga_hi_cls.obj: CGA/HI/cga_hi_cls.c.obj
@@ -647,9 +695,15 @@ help:
 	@echo "... BENCH/bench_med_plot.obj"
 	@echo "... BENCH/bench_med_plot.i"
 	@echo "... BENCH/bench_med_plot.s"
+	@echo "... CGA/HI/cga_hi_blit.obj"
+	@echo "... CGA/HI/cga_hi_blit.i"
+	@echo "... CGA/HI/cga_hi_blit.s"
 	@echo "... CGA/HI/cga_hi_bmp.obj"
 	@echo "... CGA/HI/cga_hi_bmp.i"
 	@echo "... CGA/HI/cga_hi_bmp.s"
+	@echo "... CGA/HI/cga_hi_bmp_pbm.obj"
+	@echo "... CGA/HI/cga_hi_bmp_pbm.i"
+	@echo "... CGA/HI/cga_hi_bmp_pbm.s"
 	@echo "... CGA/HI/cga_hi_cls.obj"
 	@echo "... CGA/HI/cga_hi_cls.i"
 	@echo "... CGA/HI/cga_hi_cls.s"

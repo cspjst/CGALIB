@@ -37,8 +37,35 @@ cga_hi_bmp_t* cga_hi_bmp_new(uint16_t w, uint16_t h, uint16_t sz, uint16_t n) {
     return bmp;
 }
 
-void cga_hi_bmp_shift_right(char* src, char* dst, uint16_t w, uint16_t h) {
-    // rcr
+void cga_hi_bmp_rotate_right(char* src, char* dst, uint16_t w, uint16_t h) {
+    __asm {
+        // 1. setup the registers
+        lds     si, src             ; DS:SI -> source bitmap
+        les     di, dst             ; ES:DI -> destination bitamp
+        mov     dx, h               ; DX = height
+        mov     cx, w               ; CX = width
+        // 2. calculate byte width of the the bitmap
+        shr     cx, 1               ; div 8 to get byte width
+        shr     cx, 1               ; hi res mode 8 pixels per byte
+        shr     cx, 1               ; poor old single shift 8086/88
+        jcxz    END                 ; invalid width < 8
+        push    cx                  ; preserve byte width
+        // 3.0 setup the carry flag with the last pixel of the row
+ROW:    pop     cx                  ; load byte width
+        mov     bx, cx              ; copy byte width into BX
+        dec     bx                  ; zero index
+        mov     al, ds:[si + bx]    ; last byte
+        rcr     al, 1               ; get that last bit
+        // 3.1 process a row
+        push    cx                  ; preserve counter
+COL:    lodsb                       ; grab the first byte of the row
+        rcr     al, 1               ; rotate CF->MSB and LSB->CF
+        stosb                       ; store rotated byte
+        loop    COL
+
+
+END:
+    }
 }
 
 void cga_hi_bmp_top( const cga_hi_bmp_t* bmp) {

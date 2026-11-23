@@ -25,7 +25,7 @@ void cga_hi_bmp_free_data(cga_hi_bmp_t* bmp, int i);
 
 void cga_hi_bmp_free(cga_hi_bmp_t* bmp);
 
-void cga_hi_bmp_shift_right(char* src, char* dst, uint16_t w, uint16_t h);
+void cga_hi_bmp_rotate_right(char* src, char* dst, uint16_t w, uint16_t h);
 
 void cga_hi_bmp_top(const cga_hi_bmp_t* bmp);
 
